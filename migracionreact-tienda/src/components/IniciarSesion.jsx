@@ -3,7 +3,7 @@ import { Modal } from 'antd';
 import { Button, Checkbox, Form, Input} from 'antd';
 import { useState } from 'react';
 
-const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleRegistrarse}) => {
+const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleRegistrarse, setUsuarioInicioSesion}) => {
   //Cierre de login
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -33,6 +33,7 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
         newLoadings[index] = false;
         return newLoadings;
       });
+      setIsModalVisible(false);
     }, 4000);
   };
 
@@ -124,6 +125,10 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
                   validacionUsuario != ""
                 ) {
                   enterLoading(0);
+                // Actualizamos el nombre de usuario al iniciar sesion
+                  setTimeout(() => {
+                    setUsuarioInicioSesion(validacionUsuario[0].nickname)
+                  }, 4000)
                 }
               }}
             >

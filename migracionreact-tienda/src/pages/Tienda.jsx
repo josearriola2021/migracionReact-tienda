@@ -18,7 +18,6 @@ const Tienda = () => {
                 console.log(error);
             }
         }
-
         fetchApi();
     })
 

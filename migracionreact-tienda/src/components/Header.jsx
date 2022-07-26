@@ -10,6 +10,8 @@ const Header = () => {
   //Estado inicial de modal: Iniciar Sesion
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const [usuarioInicioSesion, setUsuarioInicioSesion] = useState("Inicia Sesion");
+
   //Estado inicial de modal: Registrarse
   const [isModalVisibleRegistrarse, setIsModalVisibleRegistrarse] =
     useState(false);
@@ -45,7 +47,7 @@ const Header = () => {
                   <i className="bi bi-person text-3xl"></i>
                 </figure>
                 <p className="capitalize" id="inicioSesionHeaderUsuario">
-                  Inicia Sesion
+                  {usuarioInicioSesion}
                 </p>
               </label>
               <ul
@@ -113,6 +115,7 @@ const Header = () => {
         isModalVisible={isModalVisible}
         setIsModalVisible={setIsModalVisible}
         setIsModalVisibleRegistrarse={setIsModalVisibleRegistrarse}
+        setUsuarioInicioSesion = {setUsuarioInicioSesion}
       />
     </>
   );
