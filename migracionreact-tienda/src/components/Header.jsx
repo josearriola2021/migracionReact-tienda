@@ -4,9 +4,10 @@ import "../json/data.json";
 import "../css/Header.css";
 import IniciarSesion from './IniciarSesion';
 import Registrarse from './Registrarse';
+import { Input } from 'antd';
 // import { PoweroffOutlined } from '@ant-design/icons'; //Para loading
 
-const Header = () => {
+const Header = ({setEstadoBuscador}) => {
   //Estado inicial de modal: Iniciar Sesion
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -21,6 +22,11 @@ const Header = () => {
     setIsModalVisible(true);
   };
 
+  //buscador
+  const { Search } = Input;
+  const onSearch = (value) => setEstadoBuscador(value); 
+  const onClear = (e) => e.target.value === "" ? setEstadoBuscador(e.target.value) : console.log("");
+
   return (
     <>
       <header className="sticky top-0 z-10">
@@ -30,11 +36,11 @@ const Header = () => {
           </div>
           <div className="md:flex-none justify-end gap-2" style={{ flex: "6" }}>
             <div className="form-control w-full">
-              <input
-                type="text"
-                placeholder="Search"
-                className="input input-bordered"
-                id="buscadorInput"
+              <Search
+                placeholder="input search text"
+                onSearch={onSearch}
+                enterButton
+                onChange={onClear}
               />
             </div>
             <div className="dropdown dropdown-end" id="inicioSesionHeader">
@@ -115,7 +121,7 @@ const Header = () => {
         isModalVisible={isModalVisible}
         setIsModalVisible={setIsModalVisible}
         setIsModalVisibleRegistrarse={setIsModalVisibleRegistrarse}
-        setUsuarioInicioSesion = {setUsuarioInicioSesion}
+        setUsuarioInicioSesion={setUsuarioInicioSesion}
       />
     </>
   );

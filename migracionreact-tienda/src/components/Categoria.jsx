@@ -4,11 +4,9 @@ import { Checkbox } from 'antd';
 
 const { Panel } = Collapse;
 
-const onChange = (e) => {
-    console.log(`checked = ${e.target.checked}`);
-  };
+const Categoria = ({setEstadoCategoria}) => {
 
-const Categoria = () => {
+    const filtroProductos = []
 
     const [data, setData] = useState({});
 
@@ -28,6 +26,16 @@ const Categoria = () => {
 
     let i = 1;
 
+    const onChange = (e) => {
+        e.target.checked ? setEstadoCategoria(e.target.name)
+        :
+        console.log("No se seleccionó");
+    // const resultadoFiltrarCategoria =  data.productos?.filter((producto) => producto.itemcategoria.toLowerCase().includes(e.target.name.toLowerCase()));
+    // e.target.checked ? (resultadoFiltrarCategoria.map((productoFiltrado) => filtroProductos.push(productoFiltrado))): console.log("No se seleccionó");
+    // setEstadoCategoria(filtroProductos);
+    // console.log(e.target.checked)
+    };
+
     return (
         <div className='md:block hidden lg:pl-12 sm:pl-3 pl-4'>
             <Collapse accordion ghost>
@@ -41,7 +49,7 @@ const Categoria = () => {
                                     element.subcategorias?.map((subcategoria) => {
                                         return(
                                             <div className='flex flex-col'>
-                                                <Checkbox onChange={onChange}>{subcategoria}</Checkbox>
+                                                <Checkbox onChange={onChange} name={subcategoria}>{subcategoria}</Checkbox>
                                             </div>
                                         )
                                     })

@@ -4,7 +4,7 @@ import Card from '../components/Card';
 
 // import Card from "../components/card";
 
-const Tienda = () => {
+const Tienda = ({estadoBuscador, estadoCategoria}) => {
 
     const [data, setData] = useState({});
 
@@ -29,17 +29,29 @@ const Tienda = () => {
             element.classList.add("hidden"); 
             cantidadProductosAgregados[index].classList.remove("hidden");        
         })
-    }) 
+    })
+
+    const resultadoBuscador = data.productos?.filter((producto) => producto.nombre.toLowerCase().includes(estadoBuscador.toLowerCase()));
+    const resultadoCategoria = data.productos?.filter((producto) => producto.itemcategoria.toLowerCase().includes(estadoCategoria.toLowerCase()));
     
     return (
         <div className="mx-auto lg:px-12 sm:px-3 px-4 grid grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-4">
-            {data.productos?.map((producto) => {
-                return(
+            { 
+            resultadoCategoria != "" ? (resultadoCategoria?.map((producto) => {
+                return <Card 
+                producto={producto}
+            />
+            }))
+            :
+            (resultadoBuscador == "" ? (<div>No se encontraron coincidencias</div>)
+            :            
+            resultadoBuscador?.map((producto) => {
+                return(                  
                     <Card 
                         producto={producto}
                     />
                 )
-            })
+            }))
         }
         </div>
     );
