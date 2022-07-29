@@ -4,7 +4,7 @@ import { Checkbox } from 'antd';
 
 const { Panel } = Collapse;
 
-const Categoria = ({setEstadoCategoria}) => {
+const Categoria = ({setEstadoCategoria, setActiveCategoria, setActiveBuscador}) => {
 
     const filtroProductos = []
 
@@ -27,13 +27,11 @@ const Categoria = ({setEstadoCategoria}) => {
     let i = 1;
 
     const onChange = (e) => {
+        setActiveCategoria(true); //Para que se renderice en Tienda.js lo seleccionado en la categoria
+        setActiveBuscador(false); 
         e.target.checked ? setEstadoCategoria(e.target.name)
         :
         console.log("No se seleccionó");
-    // const resultadoFiltrarCategoria =  data.productos?.filter((producto) => producto.itemcategoria.toLowerCase().includes(e.target.name.toLowerCase()));
-    // e.target.checked ? (resultadoFiltrarCategoria.map((productoFiltrado) => filtroProductos.push(productoFiltrado))): console.log("No se seleccionó");
-    // setEstadoCategoria(filtroProductos);
-    // console.log(e.target.checked)
     };
 
     return (

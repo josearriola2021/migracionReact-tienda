@@ -4,7 +4,7 @@ import Card from '../components/Card';
 
 // import Card from "../components/card";
 
-const Tienda = ({estadoBuscador, estadoCategoria}) => {
+const Tienda = ({estadoBuscador, estadoCategoria, activeBuscador}) => {
 
     const [data, setData] = useState({});
 
@@ -36,23 +36,28 @@ const Tienda = ({estadoBuscador, estadoCategoria}) => {
     
     return (
         <div className="mx-auto lg:px-12 sm:px-3 px-4 grid grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-4">
-            { 
-            resultadoCategoria != "" ? (resultadoCategoria?.map((producto) => {
-                return <Card 
-                producto={producto}
-            />
-            }))
+            {
+            activeBuscador ? 
+            (
+                resultadoBuscador?.map((producto) => {
+                    return(
+                        <Card
+                            producto={producto}
+                        />
+                    )
+                })
+            )
             :
-            (resultadoBuscador == "" ? (<div>No se encontraron coincidencias</div>)
-            :            
-            resultadoBuscador?.map((producto) => {
-                return(                  
-                    <Card 
-                        producto={producto}
-                    />
-                )
-            }))
-        }
+            (
+                resultadoCategoria?.map((producto) => {
+                    return(
+                        <Card
+                            producto={producto}
+                        />
+                    )
+                })
+            )
+            }
         </div>
     );
 }

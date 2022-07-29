@@ -7,7 +7,7 @@ import Registrarse from './Registrarse';
 import { Input } from 'antd';
 // import { PoweroffOutlined } from '@ant-design/icons'; //Para loading
 
-const Header = ({setEstadoBuscador}) => {
+const Header = ({setEstadoBuscador, setActiveBuscador, setActiveCategoria}) => {
   //Estado inicial de modal: Iniciar Sesion
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -24,8 +24,15 @@ const Header = ({setEstadoBuscador}) => {
 
   //buscador
   const { Search } = Input;
-  const onSearch = (value) => setEstadoBuscador(value); 
-  const onClear = (e) => e.target.value === "" ? setEstadoBuscador(e.target.value) : console.log("");
+  const onSearch = (value) => {
+    setActiveBuscador(true); //Para que se renderice en Tienda.js lo seleccionado en el buscador
+    setActiveCategoria(false);
+    setEstadoBuscador(value);
+  }; 
+
+  const onClear = (e) => {
+    e.target.value === "" ? setEstadoBuscador(e.target.value) : console.log("");
+  };
 
   return (
     <>
