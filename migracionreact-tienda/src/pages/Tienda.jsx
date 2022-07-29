@@ -25,40 +25,26 @@ const Tienda = ({estadoBuscador, estadoCategoria, activeBuscador}) => {
     const cantidadProductosAgregados = document.querySelectorAll(".cantidad-productosagregados");
 
     agregarButton.forEach((element, index) => {
-        element.addEventListener("click", () => {
-            element.classList.add("hidden"); 
-            cantidadProductosAgregados[index].classList.remove("hidden");        
-        })
-    })
+      element.addEventListener("click", () => {
+        element.classList.add("hidden");
+        cantidadProductosAgregados[index].classList.remove("hidden");
+      });
+    });
 
     const resultadoBuscador = data.productos?.filter((producto) => producto.nombre.toLowerCase().includes(estadoBuscador.toLowerCase()));
-    const resultadoCategoria = data.productos?.filter((producto) => producto.itemcategoria.toLowerCase().includes(estadoCategoria.toLowerCase()));
+    
+    const resultadoCategoria = data.productos?.filter((producto) => estadoCategoria.includes(producto.itemcategoria))
     
     return (
-        <div className="mx-auto lg:px-12 sm:px-3 px-4 grid grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-4">
-            {
-            activeBuscador ? 
-            (
-                resultadoBuscador?.map((producto) => {
-                    return(
-                        <Card
-                            producto={producto}
-                        />
-                    )
-                })
-            )
-            :
-            (
-                resultadoCategoria?.map((producto) => {
-                    return(
-                        <Card
-                            producto={producto}
-                        />
-                    )
-                })
-            )
-            }
-        </div>
+      <div className="mx-auto lg:px-12 sm:px-3 px-4 grid grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-4">
+        {activeBuscador
+          ? resultadoBuscador?.map((producto) => {
+              return <Card producto={producto} />;
+            })
+          : resultadoCategoria?.map((producto) => {
+              return <Card producto={producto} />;
+            })}
+      </div>
     );
 }
  

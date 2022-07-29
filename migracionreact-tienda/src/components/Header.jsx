@@ -26,7 +26,6 @@ const Header = ({setEstadoBuscador, setActiveBuscador, setActiveCategoria}) => {
   const { Search } = Input;
   const onSearch = (value) => {
     setActiveBuscador(true); //Para que se renderice en Tienda.js lo seleccionado en el buscador
-    setActiveCategoria(false);
     setEstadoBuscador(value);
   }; 
 
