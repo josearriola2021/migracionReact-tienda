@@ -9,17 +9,19 @@ const Tienda = ({estadoBuscador, estadoCategoria, activeBuscador}) => {
     const [data, setData] = useState({});
 
     useEffect(() => {
-        const fetchApi = async () => {
-            try {
-                const response = await fetch("https://josearriola2021.github.io/dataJson/data.json");
-                const data = await response.json();
-                setData(data); 
-            } catch (error) {
-                console.log(error);
-            }
+      const fetchApi = async () => {
+        try {
+          const response = await fetch(
+            "https://josearriola2021.github.io/dataJson/data.json"
+          );
+          const data = await response.json();
+          setData(data);
+        } catch (error) {
+          console.log(error);
         }
-        fetchApi();
-    })
+      };
+      fetchApi();
+    });
 
     const agregarButton = document.querySelectorAll(".agregar-button");
     const cantidadProductosAgregados = document.querySelectorAll(".cantidad-productosagregados");
@@ -33,17 +35,24 @@ const Tienda = ({estadoBuscador, estadoCategoria, activeBuscador}) => {
 
     const resultadoBuscador = data.productos?.filter((producto) => producto.nombre.toLowerCase().includes(estadoBuscador.toLowerCase()));
     
-    const resultadoCategoria = data.productos?.filter((producto) => estadoCategoria.includes(producto.itemcategoria))
+    const resultadoCategoria = data.productos?.filter((producto) => estadoCategoria.includes(producto.itemcategoria)) 
+    //Se seleccionan aquellos productos que coinciden con el estadoCategoria.
     
     return (
       <div className="mx-auto lg:px-12 sm:px-3 px-4 grid grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-4">
-        {activeBuscador
-          ? resultadoBuscador?.map((producto) => {
+        {activeBuscador ? (
+          resultadoBuscador != "" ? (
+            resultadoBuscador?.map((producto) => {
               return <Card producto={producto} />;
             })
-          : resultadoCategoria?.map((producto) => {
-              return <Card producto={producto} />;
-            })}
+          ) : (
+            <div>No se encontraron coincidencias</div> //Si no se existen coincidencias en el buscador
+          )
+        ) : (
+          resultadoCategoria?.map((producto) => {
+            return <Card producto={producto} />;
+          })
+        )}
       </div>
     );
 }
