@@ -1,13 +1,13 @@
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import React, { useState } from 'react';
 import "../json/data.json";
 import "../css/Header.css";
+import React, { useState } from 'react';
 import IniciarSesion from './IniciarSesion';
 import Registrarse from './Registrarse';
 import { Input } from 'antd';
 // import { PoweroffOutlined } from '@ant-design/icons'; //Para loading
 
-const Header = ({setEstadoBuscador, setActiveBuscador, setActiveCheckbox}) => {
+const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList}) => {
   //Estado inicial de modal: Iniciar Sesion
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -26,8 +26,8 @@ const Header = ({setEstadoBuscador, setActiveBuscador, setActiveCheckbox}) => {
   const { Search } = Input;
   const onSearch = (value) => {
     setActiveBuscador(true); //Para que se renderice en Tienda.js lo seleccionado en el buscador
-    setEstadoBuscador(value);
-    setActiveCheckbox(true);
+    setEstadoBuscador(value); //Asigna a estadoBuscador el valor asignado en el input
+    setCheckedList([]); //Limpia los checkbox cuando uso el buscador
   }; 
 
   //limpia el buscador cuando no existe ninguna entrada

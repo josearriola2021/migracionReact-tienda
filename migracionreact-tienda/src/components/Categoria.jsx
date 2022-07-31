@@ -1,14 +1,13 @@
+import React, { useEffect, useState} from 'react';
 import { Collapse } from 'antd';
-import React, { useEffect, useState, useRef} from 'react';
 import { Checkbox } from 'antd';
-
+const CheckboxGroup = Checkbox.Group;
 const { Panel } = Collapse;
-const seleccionCategoria = []; 
 
-const Categoria = ({setEstadoCategoria, setActiveBuscador, activeCheckbox, setActiveCheckbox}) => {
+
+const Categoria = ({setEstadoCategoria, setActiveBuscador, setCheckedList, checkedList}) => {
 
   const [data, setData] = useState({}); 
-  const panelCheckboxCategoria = document.querySelectorAll('input[type="checkbox"]');
 
     useEffect(() => {
       const fetchApi = async () => {
@@ -26,36 +25,16 @@ const Categoria = ({setEstadoCategoria, setActiveBuscador, activeCheckbox, setAc
       fetchApi();
     });
 
-    let i = 1;
-
-    const deleteCategoria = (value) => {
-      const buscarCategoria = seleccionCategoria.findIndex(
-        (categoria) => categoria == value
-      );
-      seleccionCategoria.splice(buscarCategoria, 1);
-      seleccionCategoria.length > 0
-        ? setEstadoCategoria(seleccionCategoria)
-        : setActiveBuscador(true); //Si seleccionCategoria es cero, es decir si ya no existe seleccion se renderizan todos los productos
-    };
-
-    const addCategoria = (value) => {
-        seleccionCategoria.push(value);
-        setEstadoCategoria(seleccionCategoria);
-        console.log(seleccionCategoria);
-    }
-
     const onChange = (e) => {
+      setCheckedList(e); //Permite checkear el valor seleccionado
       setActiveBuscador(false); //Para renderizar en Tienda.js lo seleccionado en categorias
-      console.log(e.target.name);
-      console.log(panelCheckboxCategoria);
-      e.target.checked
-        ? addCategoria(e.target.name)
-        : deleteCategoria(e.target.name);
+      setEstadoCategoria(e); //Asigna a estado categoria la lista de checkbox seleccionados, y por ende filtrar en Tienda.jsx
+      e.length == 0
+        ? setActiveBuscador(true)
+        : console.log("Existen categorias seleccionadas");
     };
 
-    // const resetearCheckbox = () => {
-    //   setActiveCheckbox(false);
-    // }
+    let i = 1; //Para darle un key al Panel
 
     return (
       <div className="md:block hidden lg:pl-12 sm:pl-3 pl-4">
@@ -65,22 +44,14 @@ const Categoria = ({setEstadoCategoria, setActiveBuscador, activeCheckbox, setAc
             i += 1;
             return (
               <Panel header={nombre} key={i}>
-                {element.subcategorias?.map((subcategoria) => {
-                  return (
-                    <div className="flex flex-col">
-                      {
-                      // activeCheckbox ? 
-                      // <Checkbox onChange={onChange} name={subcategoria} checked={false}>
-                      //   {subcategoria}
-                      // </Checkbox>
-                      // :
-                      <Checkbox onChange={onChange} name={subcategoria} checked={activeCheckbox} >
-                        {subcategoria}
-                      </Checkbox>
-                      }
-                    </div>
-                  );
-                })}
+                <div className="flex flex-col">
+                  <CheckboxGroup
+                    options={element["subcategorias"]}
+                    value={checkedList}
+                    onChange={onChange}
+                    style={{ display: "flex", flexDirection: "column" }}
+                  />
+                </div>
               </Panel>
             );
           })}
