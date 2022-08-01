@@ -1,11 +1,13 @@
 import { Select } from 'antd';
 const { Option } = Select;
 
-const handleChange = (value) => {
-    console.log(`selected ${value}`);
+
+const Ordenar = ({setEstadoOrdenar}) => {
+
+  const handleChange = (value) => {
+    setEstadoOrdenar(value);
   };
 
-const Ordenar = () => {
     return (
         <div className='hidden md:flex justify-end lg:px-12 sm:px-2 px-4 py-3'>
             <Select

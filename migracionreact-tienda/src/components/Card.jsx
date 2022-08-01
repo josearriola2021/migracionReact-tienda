@@ -5,6 +5,10 @@ const Card = ({producto}) => {
 
   const {nombre, imagen, precio} = producto;
 
+  const onChange = (e) => {
+    console.log(e.target.value);
+  }
+
   return (
     <div className="card bg-base-100 shadow-xl max-w-xs" style={{maxHeight: "500px"}}>
       <figure><img src={imagen} alt="Nombre"/></figure>
@@ -18,7 +22,7 @@ const Card = ({producto}) => {
           <label>
             <span className="cursor-pointer border-2 border-black delete-product" style = {{borderRadius: "50%", padding: "6px"}}><i className="bi bi-trash3"></i></span>
             <span className="cursor-pointer hidden minus-product"><i className="bi bi-dash-circle text-2xl"></i></span>
-            <input type="text" value="1" className="input input-bordered cantidadproductos-input" id={nombre} style={{width: "70px"}}/>
+            <input type="text" value="1" onChange={onChange} className="input input-bordered cantidadproductos-input" id={nombre} style={{width: "70px"}}/>
             <span className="cursor-pointer add-product"><i className="bi bi-plus-circle text-2xl"></i></span>
           </label>
         </div>

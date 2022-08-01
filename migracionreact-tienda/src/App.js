@@ -11,6 +11,7 @@ function App() {
 
   const [estadoBuscador, setEstadoBuscador] = useState("");
   const [estadoCategoria, setEstadoCategoria] = useState([]); 
+  const [estadoOrdenar, setEstadoOrdenar] = useState("Precio bajo"); //Por defecto está ordenado por precio bajo
 
   const [activeBuscador, setActiveBuscador] = useState(true);
   const [checkedList, setCheckedList] = useState([]); //Permite establecer la lista de los checkbox checkeados
@@ -22,7 +23,9 @@ function App() {
         setActiveBuscador={setActiveBuscador}
         setCheckedList={setCheckedList}
       />
-      <Ordenar />
+      <Ordenar
+        setEstadoOrdenar={setEstadoOrdenar}
+      />
       <section className="flex py-3 relative">
         <Categoria
           setEstadoCategoria={setEstadoCategoria}
@@ -34,6 +37,7 @@ function App() {
           estadoBuscador={estadoBuscador}
           estadoCategoria={estadoCategoria}
           activeBuscador={activeBuscador}
+          estadoOrdenar={estadoOrdenar}
         />
       </section>
     </>
