@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { Modal } from 'antd'; //Para abrir modal
 import { Button, Checkbox, Form, Input} from 'antd'; //Para formulario de iniciar sesion
 import validacionRegistrarse from '../utils/Registrarse';
-import { useState } from 'react';
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.css';
 
 const Registrarse = ({isModalVisibleRegistrarse, setIsModalVisibleRegistrarse }) => {
 
@@ -42,6 +44,11 @@ const Registrarse = ({isModalVisibleRegistrarse, setIsModalVisibleRegistrarse })
       },
     };
 
+    const notiRegistrarse = () => {
+      alertify.set('notifier','position', 'top-center');
+      alertify.success("Registro exitoso", "delay", 1);
+    }
+
     const listaUsuariosRegistrados = []; //Se guardan los usuarios registrados
 
     //Eventos
@@ -70,6 +77,7 @@ const Registrarse = ({isModalVisibleRegistrarse, setIsModalVisibleRegistrarse })
           const newLoadings = [...prevLoadings];
           newLoadings[index] = false;
           setIsModalVisibleRegistrarse(false);
+          notiRegistrarse(); //Notificacion de registro exitoso
           return newLoadings;
         });
       }, 4000);

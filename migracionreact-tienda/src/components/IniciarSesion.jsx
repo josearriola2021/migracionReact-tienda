@@ -2,6 +2,8 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Modal } from 'antd'; 
 import { Button, Checkbox, Form, Input} from 'antd';
 import { useState } from 'react';
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.css';
 
 const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleRegistrarse, setUsuarioInicioSesion}) => {
   //Cierre de login
@@ -44,7 +46,7 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
       (result == true &&
         inputPasswordIniciarSesion !== "" &&
         validacionUsuario != "") ||
-      validacionLocalStorage != ""
+        validacionLocalStorage != ""
     ) {
       enterLoading(0);
       // Actualizamos el nombre de usuario al iniciar sesion
@@ -52,9 +54,15 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
         validacionUsuario != ""
           ? setUsuarioInicioSesion(validacionUsuario[0].nickname)
           : setUsuarioInicioSesion(validacionLocalStorage[0].nickname);
+        notiInicioSesion();
       }, 4000);
     }
   };
+
+  const notiInicioSesion = () => {
+    alertify.set('notifier','position', 'top-center');
+    alertify.success("Iniciaste sesión");
+  }
 
   //Loadings - Iniciar Sesion
   const [loadings, setLoadings] = useState([]);
