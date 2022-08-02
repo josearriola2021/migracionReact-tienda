@@ -14,9 +14,46 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
     setIsModalVisibleRegistrarse(true);
   };
 
-  //Constante para formulario de iniciar Sesion
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+  //Constante para validacion de iniciar Sesion
+  const validacionIniciarSesion = () => {
+    const validacionEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+    const inputEmailIniciarSesion = document.querySelector(
+      "#inputEmailIniciarSesion"
+    ).value;
+    const result = validacionEmail.test(inputEmailIniciarSesion);
+    const inputPasswordIniciarSesion = document.querySelector(
+      "#inputPasswordIniciarSesion"
+    ).value;
+    const jsonUsers = require("../json/data.json");
+    const users = jsonUsers["users"];
+    //Validacion de Inicio de Sesion con los usuarios del json
+    const validacionUsuario = users.filter((user) => {
+      return (
+        user.email.toLowerCase() == inputEmailIniciarSesion.toLowerCase() &&
+        user.password.toLowerCase() == inputPasswordIniciarSesion.toLowerCase()
+      );
+    });
+    const usersLocalStorage = JSON.parse(localStorage.getItem("usuarios"));
+    const validacionLocalStorage = usersLocalStorage.filter((user) => {
+      return (
+        user.email.toLowerCase() == inputEmailIniciarSesion.toLowerCase() &&
+        user.password.toLowerCase() == inputPasswordIniciarSesion.toLowerCase()
+      );
+    });
+    if (
+      (result == true &&
+        inputPasswordIniciarSesion !== "" &&
+        validacionUsuario != "") ||
+      validacionLocalStorage != ""
+    ) {
+      enterLoading(0);
+      // Actualizamos el nombre de usuario al iniciar sesion
+      setTimeout(() => {
+        validacionUsuario != ""
+          ? setUsuarioInicioSesion(validacionUsuario[0].nickname)
+          : setUsuarioInicioSesion(validacionLocalStorage[0].nickname);
+      }, 4000);
+    }
   };
 
   //Loadings - Iniciar Sesion
@@ -33,7 +70,7 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
         newLoadings[index] = false;
         return newLoadings;
       });
-      setIsModalVisible(false);
+      setIsModalVisible(false); //Desaparece el modal de iniciar sesion
     }, 4000);
   };
 
@@ -51,7 +88,6 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
           initialValues={{
             remember: true,
           }}
-          onFinish={onFinish}
         >
           <Form.Item
             name="email"
@@ -98,51 +134,7 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
               type="primary"
               htmlType="submit"
               loading={loadings[0]}
-              onClick={() => {
-                const validacionEmail =
-                  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-                const inputEmailIniciarSesion = document.querySelector(
-                  "#inputEmailIniciarSesion"
-                ).value;
-                const result = validacionEmail.test(inputEmailIniciarSesion);
-                const inputPasswordIniciarSesion = document.querySelector(
-                  "#inputPasswordIniciarSesion"
-                ).value;
-                const jsonUsers = require("../json/data.json");
-                const users = jsonUsers["users"];
-                //Validacion de Inicio de Sesion con los usuarios del json
-                const validacionUsuario = users.filter((user) => {
-                  return (
-                    user.email.toLowerCase() ==
-                      inputEmailIniciarSesion.toLowerCase() &&
-                    user.password.toLowerCase() ==
-                      inputPasswordIniciarSesion.toLowerCase()
-                  );
-                });
-                const usersLocalStorage = JSON.parse(localStorage.getItem("usuarios"));
-                const validacionLocalStorage = usersLocalStorage.filter((user) => {
-                  return(
-                    user.email.toLowerCase() ==
-                      inputEmailIniciarSesion.toLowerCase() &&
-                    user.password.toLowerCase() ==
-                      inputPasswordIniciarSesion.toLowerCase()
-                  );
-                });
-                console.log(validacionUsuario);
-                if (
-                  (result == true &&
-                  inputPasswordIniciarSesion !== "" &&
-                  validacionUsuario != "") || validacionLocalStorage != ""
-                ) {
-                  enterLoading(0);
-                // Actualizamos el nombre de usuario al iniciar sesion
-                  setTimeout(() => {
-                    validacionUsuario != "" ? setUsuarioInicioSesion(validacionUsuario[0].nickname)
-                    :
-                    setUsuarioInicioSesion(validacionLocalStorage[0].nickname);
-                  }, 4000)
-                }
-              }}
+              onClick={validacionIniciarSesion}
             >
               Log in
             </Button>

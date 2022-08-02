@@ -48,23 +48,12 @@ const Registrarse = ({isModalVisibleRegistrarse, setIsModalVisibleRegistrarse })
     const [form] = Form.useForm();
     const onFinish = (values) => {
       const usersLocalStorage = JSON.parse(localStorage.getItem("usuarios"));
-
-      // console.log(usersLocalStorage);
-      // listaUsuariosRegistrados.push(usersLocalStorage); //Agregarlo a un array los usuarios registrados en el localStorage
-      // listaUsuariosRegistrados.push(values); //Agregar el nuevo usuario registrado al array que incluye a los usuario del localstorage
-
       if (usersLocalStorage == null) {
         listaUsuariosRegistrados.push(values);
-        // listaUsuariosRegistrados.push(values);
         localStorage.setItem("usuarios", JSON.stringify(listaUsuariosRegistrados));
       } else {
         usersLocalStorage.push(values);
         localStorage.setItem("usuarios", JSON.stringify(usersLocalStorage));
-        // listaUsuariosRegistrados.push(values);
-        // localStorage.setItem(
-        //   "usuarios",
-        //   JSON.stringify(listaUsuariosRegistrados)
-        // );
       }
     };
 
