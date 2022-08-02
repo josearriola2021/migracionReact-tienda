@@ -40,21 +40,7 @@ const Tienda = ({ estadoBuscador, estadoCategoria, activeBuscador, estadoOrdenar
     estadoCategoria.includes(producto.itemcategoria)
   );
   //Se seleccionan aquellos productos que coinciden con el estadoCategoria.
-
-  // let resultadoOrdenarBuscador=[];
-
-  // // constantes para ordenar lo ingresado en el buscador
-  // const ordenarBuscadorPrecioAlto = resultadoBuscador?.sort((a,b) => b.precio - a.precio);
-  // const ordenarBuscadorPrecioBajo = resultadoBuscador?.sort((a,b) => a.precio - b.precio);
-  // const ordenarBuscadorNombreCreciente = resultadoBuscador?.sort((a,b) => a.nombre.localeCompare(b.nombre));
-  // const ordenarBuscadorNombreDecreciente = resultadoBuscador?.sort((a,b) => b.nombre.localeCompare(a.nombre));
-
-  // //constantes para ordenar lo ingresado en la seccion categorías
-  // const ordenarCategoriaPrecioAlto = resultadoCategoria?.sort((a,b) => b.precio-a.precio);
-  // const ordenarCategoriaPrecioBajo = resultadoCategoria?.sort((a,b) => a.precio-b.precio);
-  // const ordenarCategoriaNombreCreciente = resultadoCategoria?.sort((a,b) => a.nombre.localeCompare(b.nombre));
-  // const ordenarCategoriaNombreDecreciente = resultadoCategoria?.sort((a,b) => b.nombre.localeCompare(a.nombre));
-
+  
   switch (estadoOrdenar) {
     case "Precio alto":
       resultadoBuscador?.sort((a,b) => b.precio - a.precio);

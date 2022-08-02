@@ -3,7 +3,7 @@ import { Button, Checkbox, Form, Input} from 'antd'; //Para formulario de inicia
 import validacionRegistrarse from '../utils/Registrarse';
 import { useState } from 'react';
 
-const Registrarse = ({isModalVisibleRegistrarse, setIsModalVisibleRegistrarse}) => {
+const Registrarse = ({isModalVisibleRegistrarse, setIsModalVisibleRegistrarse }) => {
 
     //Cierre de formulario de registro
     const handleCancelRegistrarse = () => {
@@ -42,11 +42,23 @@ const Registrarse = ({isModalVisibleRegistrarse, setIsModalVisibleRegistrarse}) 
       },
     };
 
+      const listaUsuariosRegistrados = [];
+
     //Eventos
     const [form] = Form.useForm();
-    const onFinish2 = (values) => {
-      localStorage.setItem("usuarios", JSON.stringify(values));
-      console.log("Received values of form: ", values);
+    const onFinish = (values) => {
+      const usersLocalStorage = JSON.parse(localStorage.getItem("usuarios"));
+      listaUsuariosRegistrados.push(usersLocalStorage); //Agregarlo a un array
+      listaUsuariosRegistrados.push(values);
+
+      if (usersLocalStorage == null) {
+        localStorage.setItem("usuarios", JSON.stringify(values))
+      }else{
+        console.log(usersLocalStorage);
+        localStorage.setItem("usuarios", JSON.stringify(listaUsuariosRegistrados));
+      }
+
+    console.log(values);
     };
 
     //Loadings - Registrarse
@@ -61,6 +73,7 @@ const Registrarse = ({isModalVisibleRegistrarse, setIsModalVisibleRegistrarse}) 
         setLoadings((prevLoadings) => {
           const newLoadings = [...prevLoadings];
           newLoadings[index] = false;
+          setIsModalVisibleRegistrarse(false);
           return newLoadings;
         });
       }, 4000);
@@ -77,7 +90,7 @@ const Registrarse = ({isModalVisibleRegistrarse, setIsModalVisibleRegistrarse}) 
           {...formItemLayout}
           form={form}
           name="register"
-          onFinish={onFinish2}
+          onFinish={onFinish}
           scrollToFirstError
         >
           <Form.Item

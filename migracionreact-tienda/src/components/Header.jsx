@@ -7,7 +7,7 @@ import Registrarse from './Registrarse';
 import { Input } from 'antd';
 // import { PoweroffOutlined } from '@ant-design/icons'; //Para loading
 
-const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList}) => {
+const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
   //Estado inicial de modal: Iniciar Sesion
   const [isModalVisible, setIsModalVisible] = useState(false);
 

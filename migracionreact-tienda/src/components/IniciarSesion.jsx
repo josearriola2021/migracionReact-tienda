@@ -119,10 +119,19 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
                       inputPasswordIniciarSesion.toLowerCase()
                   );
                 });
+
+                // const validacionLocalStorage = arrayUsersLocalStorage.filter((user) => {
+                //   return(
+                //     user.email.toLowerCase() ==
+                //       inputEmailIniciarSesion.toLowerCase() &&
+                //     user.password.toLowerCase() ==
+                //       inputPasswordIniciarSesion.toLowerCase()
+                //   );
+                // });
                 if (
-                  result == true &&
+                  (result == true &&
                   inputPasswordIniciarSesion !== "" &&
-                  validacionUsuario != ""
+                  validacionUsuario != "")
                 ) {
                   enterLoading(0);
                 // Actualizamos el nombre de usuario al iniciar sesion
