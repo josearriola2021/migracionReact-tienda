@@ -42,23 +42,30 @@ const Registrarse = ({isModalVisibleRegistrarse, setIsModalVisibleRegistrarse })
       },
     };
 
-      const listaUsuariosRegistrados = [];
+    const listaUsuariosRegistrados = []; //Se guardan los usuarios registrados
 
     //Eventos
     const [form] = Form.useForm();
     const onFinish = (values) => {
       const usersLocalStorage = JSON.parse(localStorage.getItem("usuarios"));
-      listaUsuariosRegistrados.push(usersLocalStorage); //Agregarlo a un array
-      listaUsuariosRegistrados.push(values);
+
+      // console.log(usersLocalStorage);
+      // listaUsuariosRegistrados.push(usersLocalStorage); //Agregarlo a un array los usuarios registrados en el localStorage
+      // listaUsuariosRegistrados.push(values); //Agregar el nuevo usuario registrado al array que incluye a los usuario del localstorage
 
       if (usersLocalStorage == null) {
-        localStorage.setItem("usuarios", JSON.stringify(values))
-      }else{
-        console.log(usersLocalStorage);
+        listaUsuariosRegistrados.push(values);
+        // listaUsuariosRegistrados.push(values);
         localStorage.setItem("usuarios", JSON.stringify(listaUsuariosRegistrados));
+      } else {
+        usersLocalStorage.push(values);
+        localStorage.setItem("usuarios", JSON.stringify(usersLocalStorage));
+        // listaUsuariosRegistrados.push(values);
+        // localStorage.setItem(
+        //   "usuarios",
+        //   JSON.stringify(listaUsuariosRegistrados)
+        // );
       }
-
-    console.log(values);
     };
 
     //Loadings - Registrarse

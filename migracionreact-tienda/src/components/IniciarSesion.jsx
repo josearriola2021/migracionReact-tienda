@@ -119,24 +119,27 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
                       inputPasswordIniciarSesion.toLowerCase()
                   );
                 });
-
-                // const validacionLocalStorage = arrayUsersLocalStorage.filter((user) => {
-                //   return(
-                //     user.email.toLowerCase() ==
-                //       inputEmailIniciarSesion.toLowerCase() &&
-                //     user.password.toLowerCase() ==
-                //       inputPasswordIniciarSesion.toLowerCase()
-                //   );
-                // });
+                const usersLocalStorage = JSON.parse(localStorage.getItem("usuarios"));
+                const validacionLocalStorage = usersLocalStorage.filter((user) => {
+                  return(
+                    user.email.toLowerCase() ==
+                      inputEmailIniciarSesion.toLowerCase() &&
+                    user.password.toLowerCase() ==
+                      inputPasswordIniciarSesion.toLowerCase()
+                  );
+                });
+                console.log(validacionUsuario);
                 if (
                   (result == true &&
                   inputPasswordIniciarSesion !== "" &&
-                  validacionUsuario != "")
+                  validacionUsuario != "") || validacionLocalStorage != ""
                 ) {
                   enterLoading(0);
                 // Actualizamos el nombre de usuario al iniciar sesion
                   setTimeout(() => {
-                    setUsuarioInicioSesion(validacionUsuario[0].nickname)
+                    validacionUsuario != "" ? setUsuarioInicioSesion(validacionUsuario[0].nickname)
+                    :
+                    setUsuarioInicioSesion(validacionLocalStorage[0].nickname);
                   }, 4000)
                 }
               }}
