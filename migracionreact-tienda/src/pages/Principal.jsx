@@ -3,7 +3,7 @@ import '../index.css';
 import 'antd/dist/antd.css';
 import { useState } from 'react';
 import Header from '../components/Header';
-import Tienda from '../components/Tienda';
+import Productos from '../components/Productos';
 import Categoria from '../components/Categoria';
 import Ordenar from '../components/Ordenar';
 
@@ -33,7 +33,7 @@ function Principal() {
           setCheckedList={setCheckedList}
           checkedList={checkedList}
         />
-        <Tienda
+        <Productos
           estadoBuscador={estadoBuscador}
           estadoCategoria={estadoCategoria}
           activeBuscador={activeBuscador}

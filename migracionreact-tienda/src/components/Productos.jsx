@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Card from './Card';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-const Tienda = ({ estadoBuscador, estadoCategoria, activeBuscador, estadoOrdenar}) => {
+const Productos = ({ estadoBuscador, estadoCategoria, activeBuscador, estadoOrdenar}) => {
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -80,4 +80,4 @@ const Tienda = ({ estadoBuscador, estadoCategoria, activeBuscador, estadoOrdenar
   );
 };
  
-export default Tienda;
+export default Productos;
