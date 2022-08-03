@@ -36,7 +36,7 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
       );
     });
     const usersLocalStorage = JSON.parse(localStorage.getItem("usuarios"));
-    const validacionLocalStorage = usersLocalStorage.filter((user) => {
+    const validacionLocalStorage = usersLocalStorage?.filter((user) => {
       return (
         user.email.toLowerCase() == inputEmailIniciarSesion.toLowerCase() &&
         user.password.toLowerCase() == inputPasswordIniciarSesion.toLowerCase()

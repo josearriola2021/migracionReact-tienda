@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Card from '../components/Card';
+import Card from './Card';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const Tienda = ({ estadoBuscador, estadoCategoria, activeBuscador, estadoOrdenar}) => {

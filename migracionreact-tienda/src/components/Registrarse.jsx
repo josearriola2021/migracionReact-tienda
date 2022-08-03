@@ -46,7 +46,7 @@ const Registrarse = ({isModalVisibleRegistrarse, setIsModalVisibleRegistrarse })
 
     const notiRegistrarse = () => {
       alertify.set('notifier','position', 'top-center');
-      alertify.success("Registro exitoso", "delay", 1);
+      alertify.success("Registro exitoso", "delay", 5);
     }
 
     const listaUsuariosRegistrados = []; //Se guardan los usuarios registrados
