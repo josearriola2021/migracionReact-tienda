@@ -1,7 +1,9 @@
+import { config } from "./config"
+
 export const fetchApi = async () => {
     try {
       const response = await fetch(
-        "https://josearriola2021.github.io/dataJson/data.json"
+        `${config.baseUrl}`
       );
       const data = await response.json();
       return data;
