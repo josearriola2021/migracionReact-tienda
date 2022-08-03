@@ -4,7 +4,6 @@ import { Checkbox } from 'antd';
 const CheckboxGroup = Checkbox.Group;
 const { Panel } = Collapse;
 
-
 const Categoria = ({setEstadoCategoria, setActiveBuscador, setCheckedList, checkedList}) => {
 
   const [data, setData] = useState({}); 

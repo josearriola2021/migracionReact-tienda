@@ -1,23 +1,17 @@
 import { useEffect, useState } from 'react';
 import Card from './Card';
+import { fetchApi } from '../services';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-const Productos = ({ estadoBuscador, estadoCategoria, activeBuscador, estadoOrdenar}) => {
-  const [data, setData] = useState({});
+const Productos = ({ estadoBuscador, estadoCategoria, activeBuscador, estadoOrdenar, setData, data}) => {
+
+  const fetchDataApi = async () => {
+    const data = await fetchApi();
+    setData(data);
+  }
 
   useEffect(() => {
-    const fetchApi = async () => {
-      try {
-        const response = await fetch(
-          "https://josearriola2021.github.io/dataJson/data.json"
-        );
-        const data = await response.json();
-        setData(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchApi();
+    fetchDataApi();
   });
 
   const agregarButton = document.querySelectorAll(".agregar-button");
