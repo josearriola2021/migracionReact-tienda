@@ -27,14 +27,15 @@ function Principal() {
       <Ordenar setEstadoOrdenar={setEstadoOrdenar} />
       <section className="flex py-3 relative">
         <Categoria
+          data={data}
           setEstadoCategoria={setEstadoCategoria}
           setActiveBuscador={setActiveBuscador}
           setCheckedList={setCheckedList}
           checkedList={checkedList}
         />
         <Productos
-            setData={setData}
-            data={data}
+          setData={setData}
+          data={data}
           estadoBuscador={estadoBuscador}
           estadoCategoria={estadoCategoria}
           activeBuscador={activeBuscador}

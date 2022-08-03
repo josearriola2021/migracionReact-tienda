@@ -4,25 +4,7 @@ import { Checkbox } from 'antd';
 const CheckboxGroup = Checkbox.Group;
 const { Panel } = Collapse;
 
-const Categoria = ({setEstadoCategoria, setActiveBuscador, setCheckedList, checkedList}) => {
-
-  const [data, setData] = useState({}); 
-
-    useEffect(() => {
-      const fetchApi = async () => {
-        try {
-          const response = await fetch(
-            "https://josearriola2021.github.io/dataJson/data.json"
-          );
-          const data = await response.json();
-          setData(data);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
-      fetchApi();
-    });
+const Categoria = ({setEstadoCategoria, setActiveBuscador, setCheckedList, checkedList, data}) => {
 
     const onChange = (e) => {
       setCheckedList(e); //Permite checkear el valor seleccionado
