@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Card from './Card';
 import { fetchApi } from '../services';
 import 'bootstrap-icons/font/bootstrap-icons.css';
