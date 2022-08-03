@@ -1,9 +1,7 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Modal } from 'antd'; 
-import { Button, Checkbox, Form, Input} from 'antd';
+import { Button, Checkbox, Form, Input, notification} from 'antd';
 import { useState } from 'react';
-import alertify from 'alertifyjs';
-import 'alertifyjs/build/css/alertify.css';
 
 const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleRegistrarse, setUsuarioInicioSesion}) => {
   //Cierre de login
@@ -15,6 +13,17 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
   const showModalRegistrarse = () => {
     setIsModalVisibleRegistrarse(true);
   };
+
+  const notiInicioSesion = () => {
+    const openNotificacion = (placement) => {
+      notification.success({
+        message: 'Iniciaste sesión con éxito',
+        placement,
+      });
+    }
+    openNotificacion("top");
+  }
+
 
   //Constante para validacion de iniciar Sesion
   const validacionIniciarSesion = () => {
@@ -54,15 +63,9 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
         validacionUsuario != ""
           ? setUsuarioInicioSesion(validacionUsuario[0].nickname)
           : setUsuarioInicioSesion(validacionLocalStorage[0].nickname);
-        notiInicioSesion();
       }, 4000);
     }
   };
-
-  const notiInicioSesion = () => {
-    alertify.set('notifier','position', 'top-center');
-    alertify.success("Iniciaste sesión");
-  }
 
   //Loadings - Iniciar Sesion
   const [loadings, setLoadings] = useState([]);
@@ -79,6 +82,7 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
         return newLoadings;
       });
       setIsModalVisible(false); //Desaparece el modal de iniciar sesion
+      notiInicioSesion('top'); //Notificacion de inicio exitoso
     }, 4000);
   };
 
