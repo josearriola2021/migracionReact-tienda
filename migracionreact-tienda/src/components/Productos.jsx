@@ -12,7 +12,7 @@ const Productos = ({ estadoBuscador, estadoCategoria, activeBuscador, estadoOrde
 
   useEffect(() => {
     fetchDataApi();
-  });
+  },[]);
 
   const agregarButton = document.querySelectorAll(".agregar-button");
   const cantidadProductosAgregados = document.querySelectorAll(
@@ -59,7 +59,7 @@ const Productos = ({ estadoBuscador, estadoCategoria, activeBuscador, estadoOrde
       {activeBuscador ? (
         resultadoBuscador != "" ? (
           resultadoBuscador?.map((producto) => {
-            return <Card producto={producto} key={producto.id}/>;
+            return <Card producto={producto} key={producto.id} />;
           }) 
           )
          : (
