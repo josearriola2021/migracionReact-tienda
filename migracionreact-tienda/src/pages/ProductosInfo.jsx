@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import {useParams} from "react-router-dom";
-import { Avatar, Button, Card, Col, Divider, Image, List, Row, Space, Typography } from 'antd';
+import { Avatar, Button, Card, Col, Divider, Image, List, Row, Space, Tabs, Typography } from 'antd';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 const { Text, Title } = Typography;
 const { Meta } = Card;
+const { TabPane } = Tabs;
 
 const ProductosInfo = () => {
     const {nombre, id} = useParams();
@@ -18,6 +19,10 @@ const ProductosInfo = () => {
     useEffect(() => {
         fetchProductosInfo();
     }, []);
+
+    const onChange = (key) => {
+      console.log(key);
+    };
 
     const searchId = data.productos?.filter((producto) => {
         return producto.id == id;
@@ -69,41 +74,49 @@ const ProductosInfo = () => {
     return (
       <>
         {searchId && (
-          <Row gutter={20} justify="center">
-            <Col className="gutter-row" xs={{ span: 24 }} lg={{ span: 6 }}>
-              <Image width="25rem" src={searchId[0].imagen} />
-            </Col>
-            <Col className="gutter-row" xs={{ span: 24 }} lg={{ span: 6 }}>
-              <Title level={3}>{nombre}</Title>
-              <Divider style={{ width: "10px" }} />
-              <Title level={5} type="danger" style={{ marginBottom: "20px" }}>
-                Precio: {searchId[0].precio}
+          <>
+            <div className="flex flex-col gap-10 md:flex-row justify-center gap-4">
+              <div className="md:col-span-1 ">
+                <Image width="25rem" src={searchId[0].imagen} />
+              </div>
+              <div className=" md:w-80 col-span-1">
+                <Title level={3}>{nombre}</Title>
+                <Divider style={{ width: "10px" }} />
+                <Title level={5} type="danger" style={{ marginBottom: "20px" }}>
+                  Precio: {searchId[0].precio}
+                </Title>
+                <Button
+                  type="primary"
+                  size="large"
+                  shape="round"
+                  style={{ width: "200px" }}
+                >
+                  Agregar
+                </Button>
+              </div>
+              <div className="md:w-80 col-span-1 justify-center">
+                <List
+                  size="large"
+                  header={
+                    <>
+                      <Title level={5}>Vendido y despachado por</Title>{" "}
+                      <p>Ecommerce</p>
+                    </>
+                  }
+                  footer={footer}
+                  bordered
+                  dataSource={tiposEntrega}
+                  renderItem={(item) => <List.Item>{item}</List.Item>}
+                />
+              </div>
+            </div>
+            <div className="mt-10">
+              <Title level={3} className="text-center">
+                Sobre este Producto
               </Title>
-              <Button
-                type="primary"
-                size="large"
-                shape="round"
-                style={{ width: "40%" }}
-              >
-                Agregar
-              </Button>
-            </Col>
-            <Col className="gutter-row" xs={{ span: 24 }} lg={{ span: 6 }}>
-              <List
-                size="large"
-                header={
-                  <>
-                    <Title level={5}>Vendido y despachado por</Title>{" "}
-                    <p>Ecommerce</p>
-                  </>
-                }
-                footer={footer}
-                bordered
-                dataSource={tiposEntrega}
-                renderItem={(item) => <List.Item>{item}</List.Item>}
-              />
-            </Col>
-          </Row>
+              
+            </div>
+          </>
         )}
       </>
     );
