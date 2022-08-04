@@ -1,10 +1,10 @@
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import "../json/data.json";
-import "../css/Header.css";
 import React, { useState } from 'react';
 import IniciarSesion from './IniciarSesion';
 import Registrarse from './Registrarse';
 import { Input } from 'antd';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import "../json/data.json";
+import "../css/Header.css";
 // import { PoweroffOutlined } from '@ant-design/icons'; //Para loading
 
 const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
