@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {useParams} from "react-router-dom";
-import { Avatar, Button, Card, Col, Divider, Image, List, Row, Space, Tabs, Typography } from 'antd';
+import { Avatar, Button, Card, Divider, Image, List, Space, Table, Tabs, Typography } from 'antd';
+import { AndroidOutlined, AppleOutlined } from '@ant-design/icons';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 const { Text, Title } = Typography;
 const { Meta } = Card;
@@ -24,9 +25,13 @@ const ProductosInfo = () => {
       console.log(key);
     };
 
-    const searchId = data.productos?.filter((producto) => {
+    const searchProductoId = data.productos?.filter((producto) => {
         return producto.id == id;
     })
+
+    const searchEspecificacionesId = data.especificaciones?.filter((producto) => {
+      return producto.id == id;
+  })
 
 
     const tiposEntrega = [
@@ -73,17 +78,21 @@ const ProductosInfo = () => {
 
     return (
       <>
-        {searchId && (
+        {searchProductoId && (
           <>
+            <div className="pl-60 py-4">
+              {searchProductoId[0].categoria} -{" "}
+              {searchProductoId[0].itemcategoria}
+            </div>
             <div className="flex flex-col gap-10 md:flex-row justify-center gap-4">
               <div className="md:col-span-1 ">
-                <Image width="25rem" src={searchId[0].imagen} />
+                <Image width="25rem" src={searchProductoId[0].imagen} />
               </div>
               <div className=" md:w-80 col-span-1">
                 <Title level={3}>{nombre}</Title>
                 <Divider style={{ width: "10px" }} />
                 <Title level={5} type="danger" style={{ marginBottom: "20px" }}>
-                  Precio: {searchId[0].precio}
+                  Precio: {searchProductoId[0].precio}
                 </Title>
                 <Button
                   type="primary"
@@ -110,11 +119,41 @@ const ProductosInfo = () => {
                 />
               </div>
             </div>
-            <div className="mt-10">
+
+            <div className="flex flex-col items-center mt-10">
               <Title level={3} className="text-center">
                 Sobre este Producto
               </Title>
-              
+              <Tabs defaultActiveKey="1" size="large" centered>
+                <TabPane
+                  tab={
+                    <span>
+                      <AppleOutlined />
+                      Especificaciones
+                    </span>
+                  }
+                  key="1"
+                >
+                  {searchEspecificacionesId && (
+                    <div className="">
+                      <table className="table">
+                        <tbody>
+                          {
+                            searchEspecificacionesId[0].descripcion?.map((elemento) => {
+                              return (
+                                <tr className="text-base">
+                                  <td className="font-semibold">{elemento.titulo}</td>
+                                  <td>{elemento.detalle}</td>
+                                </tr>
+                              )
+                            })
+                          }
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </TabPane>
+              </Tabs>
             </div>
           </>
         )}
