@@ -1,7 +1,9 @@
+import { useState } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Modal } from 'antd'; 
 import { Button, Checkbox, Form, Input, notification} from 'antd';
-import { useState } from 'react';
 
 const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleRegistrarse, setUsuarioInicioSesion}) => {
   //Cierre de login
@@ -24,6 +26,7 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
     openNotificacion("top");
   }
 
+  const {setUserAuth} = useContext(AuthContext); //Funcion del context para actualizar el Usuario autenticado
 
   //Constante para validacion de iniciar Sesion
   const validacionIniciarSesion = () => {
@@ -58,14 +61,14 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
         validacionLocalStorage != ""
     ) {
       enterLoading(0);
-      // Actualizamos el nombre de usuario al iniciar sesion
       setTimeout(() => {
-        validacionUsuario != ""
-          ? setUsuarioInicioSesion(validacionUsuario[0].nickname)
-          : setUsuarioInicioSesion(validacionLocalStorage[0].nickname);
+        //Guardamos el usuario y seteamos el usuario At
+        validacionUsuario !== "" ? localStorage.setItem("userAuth", JSON.stringify(validacionUsuario[0].nickname)) : localStorage.setItem("userAuth", JSON.stringify(validacionLocalStorage[0].nickname));
+        validacionUsuario !== "" ? setUserAuth(validacionUsuario[0].nickname) : setUserAuth(validacionLocalStorage[0].nickname);
       }, 4000);
     }
   };
+
 
   //Loadings - Iniciar Sesion
   const [loadings, setLoadings] = useState([]);

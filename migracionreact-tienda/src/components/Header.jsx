@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, {useContext, useState } from 'react';
 import IniciarSesion from './IniciarSesion';
 import Registrarse from './Registrarse';
 import { Input } from 'antd';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "../json/data.json";
 import "../css/Header.css";
-import { Outlet } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 // import { PoweroffOutlined } from '@ant-design/icons'; //Para loading
 
@@ -15,6 +15,7 @@ const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
 
   const [usuarioInicioSesion, setUsuarioInicioSesion] = useState("Inicia Sesion");
 
+  const {userAuth} = useContext(AuthContext);
   //Estado inicial de modal: Registrarse
   const [isModalVisibleRegistrarse, setIsModalVisibleRegistrarse] =
     useState(false);
@@ -63,7 +64,7 @@ const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
                   <i className="bi bi-person text-3xl"></i>
                 </figure>
                 <p className="capitalize" id="inicioSesionHeaderUsuario">
-                  {usuarioInicioSesion}
+                  {userAuth}
                 </p>
               </label>
               <ul
