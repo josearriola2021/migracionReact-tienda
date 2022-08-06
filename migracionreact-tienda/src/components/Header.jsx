@@ -1,4 +1,4 @@
-import React, {useContext, useState } from 'react';
+import React, {useContext, useRef, useState } from 'react';
 import IniciarSesion from './IniciarSesion';
 import Registrarse from './Registrarse';
 import { Input } from 'antd';
@@ -10,17 +10,25 @@ import "../css/Header.css";
 // import { PoweroffOutlined } from '@ant-design/icons'; //Para loading
 
 const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
+
+  const inicioSesionHeaderItems = useRef();
+
   //Estado inicial de modal: Iniciar Sesion
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const {userAuth} = useContext(AuthContext);
+  const {userAuth, logout} = useContext(AuthContext);
   //Estado inicial de modal: Registrarse
   const [isModalVisibleRegistrarse, setIsModalVisibleRegistrarse] =
     useState(false);
 
   //Eventos para abrir login
   const showModal = () => {
-    setIsModalVisible(true);
+    if (userAuth != "Iniciar Sesión") {
+      setIsModalVisible(false);
+      inicioSesionHeaderItems.current.classList.remove("hidden")
+    }else{
+      setIsModalVisible(true);
+    }
   };
 
   //buscador
@@ -44,6 +52,7 @@ const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
             <a className="btn btn-ghost normal-case text-xl">Tienda Virtual</a>
           </div>
           <div className="md:flex-none justify-end gap-2" style={{ flex: "6" }}>
+            {/* Buscador */}
             <div className="form-control w-full">
               <Search
                 placeholder="input search text"
@@ -52,6 +61,7 @@ const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
                 onChange={onClear}
               />
             </div>
+            {/* Icono de logueo */}
             <div className="dropdown dropdown-end" id="inicioSesionHeader">
               <label
                 tabindex="0"
@@ -68,7 +78,7 @@ const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
               <ul
                 tabindex="0"
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-black hidden"
-                id="inicioSesionHeaderItems"
+                ref={inicioSesionHeaderItems}
               >
                 <li>
                   <a className="justify-between">
@@ -77,13 +87,11 @@ const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
                   </a>
                 </li>
                 <li>
-                  <a>Settings</a>
-                </li>
-                <li>
-                  <a>Logout</a>
+                  <a onClick={logout}>Logout</a>
                 </li>
               </ul>
             </div>
+            {/* Icono de carrito de compras */}
             <div className="dropdown dropdown-end">
               <label tabindex="0" className="btn btn-ghost btn-circle">
                 <figure className="indicator">
@@ -121,7 +129,6 @@ const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
           </div>
         </div>
       </header>
-
       <Registrarse
         isModalVisibleRegistrarse={isModalVisibleRegistrarse}
         setIsModalVisibleRegistrarse={setIsModalVisibleRegistrarse}

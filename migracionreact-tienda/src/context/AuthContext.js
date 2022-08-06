@@ -52,7 +52,15 @@ const AuthProvider = ({children}) => {
       }
     }
 
-    return ( <AuthContext.Provider value={{userAuth, setUserAuth, login}}>{children}</AuthContext.Provider> );
+    function logout(){
+      localStorage.removeItem("userAuth");
+      window.location.href = "/";
+      setTimeout(() => {
+        setUserAuth("Iniciar Sesión");
+      }, 4000)
+    }
+
+    return ( <AuthContext.Provider value={{userAuth, setUserAuth, login, logout}}>{children}</AuthContext.Provider> );
 
 }
  
