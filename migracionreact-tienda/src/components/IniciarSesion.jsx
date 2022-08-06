@@ -6,6 +6,9 @@ import { Modal } from 'antd';
 import { Button, Checkbox, Form, Input, notification} from 'antd';
 
 const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleRegistrarse, setUsuarioInicioSesion}) => {
+
+  const {setUserAuth} = useContext(AuthContext); //Funcion del context para actualizar el Usuario autenticado
+
   //Cierre de login
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -25,8 +28,6 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
     }
     openNotificacion("top");
   }
-
-  const {setUserAuth} = useContext(AuthContext); //Funcion del context para actualizar el Usuario autenticado
 
   //Constante para validacion de iniciar Sesion
   const validacionIniciarSesion = () => {
@@ -58,12 +59,15 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
       (result == true &&
         inputPasswordIniciarSesion !== "" &&
         validacionUsuario != "") ||
-        validacionLocalStorage != ""
+        validacionLocalStorage.length > 0
     ) {
       enterLoading(0);
       setTimeout(() => {
-        //Guardamos el usuario y seteamos el usuario At
+        console.log(validacionUsuario);
+        console.log(validacionLocalStorage);
+        //Guardamos el usuario en el localStorage
         validacionUsuario != "" ? localStorage.setItem("userAuth", JSON.stringify(validacionUsuario[0].nickname)) : localStorage.setItem("userAuth", JSON.stringify(validacionLocalStorage[0].nickname));
+        //Seteamos el UserAuth de acuerdo al local storage
         validacionUsuario != "" ? setUserAuth(validacionUsuario[0].nickname) : setUserAuth(validacionLocalStorage[0].nickname);
       }, 4000);
     }

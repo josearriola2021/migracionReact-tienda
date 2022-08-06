@@ -4,6 +4,7 @@ export const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
 
+    //Lo setea desde un inicio
     const userStorage = JSON.parse(localStorage.getItem("userAuth")) || "Iniciar Sesión";
     const [userAuth, setUserAuth] = useState(userStorage);
 
