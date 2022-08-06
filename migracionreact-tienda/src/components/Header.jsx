@@ -2,18 +2,16 @@ import React, {useContext, useState } from 'react';
 import IniciarSesion from './IniciarSesion';
 import Registrarse from './Registrarse';
 import { Input } from 'antd';
+import { AuthContext } from '../context/AuthContext';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "../json/data.json";
 import "../css/Header.css";
-import { AuthContext } from '../context/AuthContext';
 
 // import { PoweroffOutlined } from '@ant-design/icons'; //Para loading
 
 const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
   //Estado inicial de modal: Iniciar Sesion
   const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const [usuarioInicioSesion, setUsuarioInicioSesion] = useState("Inicia Sesion");
 
   const {userAuth} = useContext(AuthContext);
   //Estado inicial de modal: Registrarse
@@ -132,7 +130,6 @@ const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
         isModalVisible={isModalVisible}
         setIsModalVisible={setIsModalVisible}
         setIsModalVisibleRegistrarse={setIsModalVisibleRegistrarse}
-        setUsuarioInicioSesion={setUsuarioInicioSesion}
       />
       {/* <Outlet /> */}
     </>

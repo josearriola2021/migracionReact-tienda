@@ -1,7 +1,7 @@
 import {Button, Checkbox, Form, Input} from "antd";
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { LockOutlined, LoginOutlined, UserOutlined } from '@ant-design/icons';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 const FormLogin = ({loadings, enterLoading, showModalRegistrarse}) => {
     const { login } = useContext(AuthContext); //Funcion del context para actualizar el Usuario autenticado
@@ -58,11 +58,7 @@ const FormLogin = ({loadings, enterLoading, showModalRegistrarse}) => {
           </Form.Item>
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            loading={loadings[0]}
-          >
+          <Button type="primary" htmlType="submit" loading={loadings[0]}>
             Log in
           </Button>
           O{" "}

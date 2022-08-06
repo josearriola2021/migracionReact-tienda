@@ -1,5 +1,5 @@
 import { Breadcrumb, Button, Card, Divider, Image, Tabs, Typography } from 'antd';
-import { AppleOutlined, HomeOutlined } from '@ant-design/icons';
+import { AppleOutlined } from '@ant-design/icons';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 const { Title } = Typography;
 const { TabPane } = Tabs;
