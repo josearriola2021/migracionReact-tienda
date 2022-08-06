@@ -5,6 +5,8 @@ import { Input } from 'antd';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "../json/data.json";
 import "../css/Header.css";
+import { Outlet } from 'react-router-dom';
+
 // import { PoweroffOutlined } from '@ant-design/icons'; //Para loading
 
 const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
@@ -131,6 +133,7 @@ const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
         setIsModalVisibleRegistrarse={setIsModalVisibleRegistrarse}
         setUsuarioInicioSesion={setUsuarioInicioSesion}
       />
+      {/* <Outlet /> */}
     </>
   );
 }
