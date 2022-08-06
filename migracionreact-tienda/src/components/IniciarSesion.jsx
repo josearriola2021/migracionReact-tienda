@@ -63,12 +63,11 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
       enterLoading(0);
       setTimeout(() => {
         //Guardamos el usuario y seteamos el usuario At
-        validacionUsuario !== "" ? localStorage.setItem("userAuth", JSON.stringify(validacionUsuario[0].nickname)) : localStorage.setItem("userAuth", JSON.stringify(validacionLocalStorage[0].nickname));
-        validacionUsuario !== "" ? setUserAuth(validacionUsuario[0].nickname) : setUserAuth(validacionLocalStorage[0].nickname);
+        validacionUsuario != "" ? localStorage.setItem("userAuth", JSON.stringify(validacionUsuario[0].nickname)) : localStorage.setItem("userAuth", JSON.stringify(validacionLocalStorage[0].nickname));
+        validacionUsuario != "" ? setUserAuth(validacionUsuario[0].nickname) : setUserAuth(validacionLocalStorage[0].nickname);
       }, 4000);
     }
   };
-
 
   //Loadings - Iniciar Sesion
   const [loadings, setLoadings] = useState([]);
