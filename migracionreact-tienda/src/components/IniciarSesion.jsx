@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Modal } from 'antd'; 
 import { notification} from 'antd';
-import FormIniciarSesion from './FormIniciarSesion';
+import FormLogin from './FormLogin';
 
 const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleRegistrarse}) => {
 
@@ -53,7 +53,7 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
     >
       <article className="flex justify-center">
         <div className="w-60">
-          <FormIniciarSesion loadings={loadings} enterLoading={enterLoading} showModalRegistrarse={showModalRegistrarse}/>
+          <FormLogin loadings={loadings} enterLoading={enterLoading} showModalRegistrarse={showModalRegistrarse}/>
         </div>
       </article>
     </Modal>
