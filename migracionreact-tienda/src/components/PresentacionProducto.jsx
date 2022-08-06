@@ -66,7 +66,7 @@ const  PresentacionInfo = ({data, nombre, id}) => {
             </div>
             {/* Imagen de Producto */}
             <div className="flex flex-col gap-10 md:flex-row justify-center gap-4">
-              <div className="m-auto md:col-span-1 ">
+              <div className="mx-auto md:mx-0 col-span-1 ">
                 <Image
                   width="25rem"
                   src={searchProductoId[0].imagen}
