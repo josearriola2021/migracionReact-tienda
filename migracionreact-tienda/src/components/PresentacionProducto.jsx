@@ -50,23 +50,31 @@ const  PresentacionInfo = ({data, nombre, id}) => {
       <>
         {searchProductoId && (
           <>
-            <div className='ml-52 my-3'>
-                <Breadcrumb>
-                  <Breadcrumb.Item>
-                    <i class="bi bi-house-door"></i>
-                  </Breadcrumb.Item>
-                  <Breadcrumb.Item>
-                    <span>{searchProductoId[0].categoria}</span>
-                  </Breadcrumb.Item>
-                  <Breadcrumb.Item>{searchProductoId[0].itemcategoria}</Breadcrumb.Item>
-                </Breadcrumb>
+            {/* Ruta */}
+            <div className="ml-2 md:ml-52 my-3">
+              <Breadcrumb>
+                <Breadcrumb.Item>
+                  <i class="bi bi-house-door"></i>
+                </Breadcrumb.Item>
+                <Breadcrumb.Item>
+                  <span>{searchProductoId[0].categoria}</span>
+                </Breadcrumb.Item>
+                <Breadcrumb.Item>
+                  {searchProductoId[0].itemcategoria}
+                </Breadcrumb.Item>
+              </Breadcrumb>
             </div>
+            {/* Imagen de Producto */}
             <div className="flex flex-col gap-10 md:flex-row justify-center gap-4">
-              <div className="md:col-span-1 ">
-                <Image width="25rem" src={searchProductoId[0].imagen} />
+              <div className="m-auto md:col-span-1 ">
+                <Image
+                  width="25rem"
+                  src={searchProductoId[0].imagen}
+                  preview={false}
+                />
               </div>
-
-              <div className=" md:w-80 col-span-1">
+              {/* Nombres y precios */}
+              <div className="ml-4 md:w-80 col-span-1">
                 <Title level={3}>{nombre}</Title>
                 <Divider style={{ width: "10px" }} />
                 <Title level={4} type="danger" style={{ marginBottom: "20px" }}>
@@ -86,9 +94,9 @@ const  PresentacionInfo = ({data, nombre, id}) => {
                 <PagosEntrega />
               </div>
             </div>
-
-            <div className="flex flex-col items-center">
-              <div className="w-3/5">
+            {/* Especificaciones */}
+            <div className="mt-16 flex flex-col items-center">
+              <div className="md:w-3/5">
                 <Title level={3} className="text-center">
                   Sobre este Producto
                 </Title>
@@ -109,10 +117,10 @@ const  PresentacionInfo = ({data, nombre, id}) => {
                             (elemento) => {
                               return (
                                 <tr className="text-base">
-                                  <td className="font-semibold">
+                                  <td className="font-semibold p-0">
                                     {elemento.titulo}
                                   </td>
-                                  <td>{elemento.detalle}</td>
+                                  <td className="pl-0">{elemento.detalle}</td>
                                 </tr>
                               );
                             }

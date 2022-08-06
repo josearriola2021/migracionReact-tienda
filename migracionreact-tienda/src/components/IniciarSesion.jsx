@@ -94,68 +94,67 @@ const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleReg
       footer={null}
     >
       <article className="flex justify-center">
-        <Form
-          name="normal_login"
-          className="login-form"
-          initialValues={{
-            remember: true,
-          }}
-        >
-          <Form.Item
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: "Ingresa tu email!",
-              },
-            ]}
+        <div className="w-60">
+          <Form
+            name="normal_login"
+            className="login-form"
+            initialValues={{
+              remember: true,
+            }}
           >
-            <Input
-              prefix={<UserOutlined className="site-form-item-icon" />}
-              type="email"
-              placeholder="Email"
-              id="inputEmailIniciarSesion"
-            />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Ingresa tu contraseña!",
-              },
-            ]}
-          >
-            <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
-              type="password"
-              placeholder="Password"
-              id="inputPasswordIniciarSesion"
-            />
-          </Form.Item>
-          <Form.Item>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-            <a className="login-form-forgot" href="">
-              Olvidaste tu contraseña
-            </a>
-          </Form.Item>
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              loading={loadings[0]}
-              onClick={validacionIniciarSesion}
+            <Form.Item
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "Ingresa tu email!",
+                },
+              ]}
             >
-              Log in
-            </Button>
-            O{" "}
-            <a href="#" onClick={showModalRegistrarse}>
-              Registrarse!
-            </a>
-          </Form.Item>
-        </Form>
+              <Input
+                prefix={<UserOutlined className="site-form-item-icon" />}
+                type="email"
+                placeholder="Email"
+                id="inputEmailIniciarSesion"
+              />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Ingresa tu contraseña!",
+                },
+              ]}
+            >
+              <Input
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                type="password"
+                placeholder="Password"
+                id="inputPasswordIniciarSesion"
+              />
+            </Form.Item>
+            <Form.Item>
+              <Form.Item name="remember" valuePropName="checked" noStyle>
+                <Checkbox>Remember me</Checkbox>
+              </Form.Item>
+            </Form.Item>
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={loadings[0]}
+                onClick={validacionIniciarSesion}
+              >
+                Log in
+              </Button>
+              O{" "}
+              <a href="#" onClick={showModalRegistrarse}>
+                Registrarse!
+              </a>
+            </Form.Item>
+          </Form>
+        </div>
       </article>
     </Modal>
   );
