@@ -32,10 +32,11 @@ export const CarritoComprasProvider = ({children}) => {
       saveInLocalStorage(productosAgregados);
     };
 
-    // const removeProducto = (id) => {
-    //     const newProductoAgregados = productosAgregados.filter((producto) => producto.id=id);
-
-    // }
+    const removeProducto = (id) => {
+        const newProductoAgregados = productosAgregados.filter((producto) => producto.id !==id);
+        setProductosAgregados(newProductoAgregados);
+        saveInLocalStorage(newProductoAgregados);
+    }
 
     const saveInLocalStorage = (productosAgregados) => {
         localStorage.setItem("carritoCompras", JSON.stringify(productosAgregados))
@@ -47,7 +48,7 @@ export const CarritoComprasProvider = ({children}) => {
     }
 
     return (
-        <CarritoComprasContext.Provider value={{productosAgregados, addProducto, isIncludeInProductosAgregados}}>
+        <CarritoComprasContext.Provider value={{productosAgregados, addProducto, isIncludeInProductosAgregados, removeProducto}}>
             {children}
         </CarritoComprasContext.Provider>
     );

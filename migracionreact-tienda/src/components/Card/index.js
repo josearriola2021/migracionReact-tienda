@@ -12,10 +12,16 @@ const Card = ({producto}) => {
   const [size, setSize] = useState('large');
   const [buttonSecondary, setButtonSecondary] = useState(true)
 
-  const {addProducto, isIncludeInProductosAgregados} = useContext(CarritoComprasContext);
+  const {addProducto, isIncludeInProductosAgregados, removeProducto} = useContext(CarritoComprasContext);
 
   const onChange = (value) => {
     value == 0 && setButtonSecondary(true);
+    removeProducto(id);
+  }
+
+  const deleteProducto = () => {
+    setButtonSecondary(true);
+    removeProducto(id);
   }
 
   //Activa el boton secundario para seleccionar la cantidad de productos a agregar al carrito
@@ -30,7 +36,6 @@ const Card = ({producto}) => {
   useEffect(() => {
     const pintado = isIncludeInProductosAgregados(id);
     setButtonSecondary(pintado);
-    
   }, [buttonSecondary])
 
   return (
@@ -63,7 +68,7 @@ const Card = ({producto}) => {
               size={size}
             >
               <div className="flex justify-center items-center gap-2">
-                <DeleteOutlined style={{fontSize:"20px"}} />
+                <DeleteOutlined style={{fontSize:"20px"}} onClick={deleteProducto}/>
                 <InputNumber min={0} max={100} defaultValue={1} onChange={onChange}/>
               </div>
             </Button>
