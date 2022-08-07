@@ -6,7 +6,7 @@ export const CarritoComprasProvider = ({children}) => {
 
     //Captura los productos guardados en el local Storage cuando refrezco mi navegador
     const agregados = JSON.parse(localStorage.getItem("carritoCompras")) || [];
-    const { productosAgregados, setProductosAgregados } = useState(agregados);
+    const [productosAgregados, setProductosAgregados] = useState(agregados);
 
     //para poder guardar el producto agregado en el carrito de compras
     /**
@@ -14,29 +14,40 @@ export const CarritoComprasProvider = ({children}) => {
      * fecha en la que agregué el producto
      */
 
-    const addProducto = (id) => {
+    const addProducto = (id, nombre, precio) => {
       const productoAgregado = {
         id,
         created_add: new Date(),
+        nombre,
+        precio,
       };
 
-      if (productosAgregados.lenght === 0) {
+      if (productosAgregados.length === 0) {
          setProductosAgregados([productoAgregado]);
-         saveInLocalStorage();
+         saveInLocalStorage([productoAgregado]);
          return;
       }
-      setProductosAgregados([
-        ...productosAgregados, productoAgregado
-      ]);
-      saveInLocalStorage();
+      productosAgregados[productosAgregados.length] = productoAgregado;
+      setProductosAgregados(productosAgregados) ;
+      saveInLocalStorage(productosAgregados);
     };
 
-    const saveInLocalStorage = () => {
-        localStorage.setItem("carritoCompras", productosAgregados)
+    // const removeProducto = (id) => {
+    //     const newProductoAgregados = productosAgregados.filter((producto) => producto.id=id);
+
+    // }
+
+    const saveInLocalStorage = (productosAgregados) => {
+        localStorage.setItem("carritoCompras", JSON.stringify(productosAgregados))
+    }
+
+    const isIncludeInProductosAgregados = (id) => {
+        const producto = productosAgregados.findIndex((producto) => producto.id === id);
+        return producto === -1 ? true : false;
     }
 
     return (
-        <CarritoComprasContext.Provider value={{productosAgregados, addProducto}}>
+        <CarritoComprasContext.Provider value={{productosAgregados, addProducto, isIncludeInProductosAgregados}}>
             {children}
         </CarritoComprasContext.Provider>
     );

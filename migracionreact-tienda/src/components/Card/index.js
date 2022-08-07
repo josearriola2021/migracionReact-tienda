@@ -1,6 +1,6 @@
 // import '../json/data.json';
 import "../../index.css";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {CarritoComprasContext} from "../../context";
 import {Button, InputNumber} from "antd";
 import {DeleteOutlined} from '@ant-design/icons';
@@ -12,19 +12,26 @@ const Card = ({producto}) => {
   const [size, setSize] = useState('large');
   const [buttonSecondary, setButtonSecondary] = useState(true)
 
+  const {addProducto, isIncludeInProductosAgregados} = useContext(CarritoComprasContext);
+
   const onChange = (value) => {
     value == 0 && setButtonSecondary(true);
   }
 
   //Activa el boton secundario para seleccionar la cantidad de productos a agregar al carrito
   const activeButtonSecondary = (e) => {
-    
-    console.log(e.target.value);
     buttonSecondary ? 
     setButtonSecondary(false) : setButtonSecondary(true);
+    if (buttonSecondary == true) {
+      addProducto(id, nombre, precio);
+    }
   }
 
-  const {addProducto} = useContext(CarritoComprasContext);
+  useEffect(() => {
+    const pintado = isIncludeInProductosAgregados(id);
+    setButtonSecondary(pintado);
+    
+  }, [buttonSecondary])
 
   return (
     <div
