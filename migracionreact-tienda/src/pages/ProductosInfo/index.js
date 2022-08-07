@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {useParams} from "react-router-dom";
 import {PresentacionProducto} from "../../components";
+import HeaderProductosInfo from "../../components/HeaderProductoInfo";
 
 const ProductosInfo = () => {
     const {nombre, id} = useParams();
@@ -18,7 +19,10 @@ const ProductosInfo = () => {
    
 
     return (
-      <PresentacionProducto data={data} nombre={nombre} id={id}/>
+      <>
+        <HeaderProductosInfo />
+        <PresentacionProducto data={data} nombre={nombre} id={id} />
+      </>
     );
 }
  

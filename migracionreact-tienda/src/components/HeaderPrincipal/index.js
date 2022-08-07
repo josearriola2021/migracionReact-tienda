@@ -1,13 +1,11 @@
 import React, {useContext, useState } from 'react';
 import {HeaderTemplate} from '../../components';
 import { AuthContext } from '../../context/AuthContext';
-import {IniciarSesion, Registrarse} from ".."
+import {IniciarSesion, Registrarse} from "../../components";
 import { Input } from 'antd';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "../../json/data.json";
 import "../../css/Header.css";
-
-// import { PoweroffOutlined } from '@ant-design/icons'; //Para loading
 
 const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
 

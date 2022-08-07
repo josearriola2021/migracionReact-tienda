@@ -4,17 +4,17 @@ import { AuthContext } from '../../context/AuthContext';
 const HeaderTemplate = ({ children, setIsModalVisible }) => {
 
     const inicioSesionHeaderItems = useRef();
-    const {userAuth, logout} = useContext(AuthContext);
+    const { userAuth, logout } = useContext(AuthContext);
 
-//Eventos para abrir login
-  const showModal = () => {
-    if (userAuth != "Iniciar Sesión") {
-      setIsModalVisible(false);
-      inicioSesionHeaderItems.current.classList.remove("hidden")
-    }else{
-      setIsModalVisible(true);
-    }
-  };
+    //Eventos para abrir login
+    const showModal = () => {
+      if (userAuth != "Iniciar Sesión") {
+        setIsModalVisible(false);
+        inicioSesionHeaderItems.current.classList.remove("hidden");
+      } else {
+        setIsModalVisible(true);
+      }
+    };
 
     return (
       <header className="sticky top-0 z-10">
