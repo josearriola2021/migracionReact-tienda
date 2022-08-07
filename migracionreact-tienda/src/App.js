@@ -1,12 +1,14 @@
 import Router from "./router";
-import { AuthProvider } from "./context";
+import { AuthProvider, CarritoComprasProvider } from "./context";
 
 function App() {
 
   return (
     <>
       <AuthProvider>
-        <Router />
+        <CarritoComprasProvider>
+          <Router />
+        </CarritoComprasProvider>
       </AuthProvider>
     </>
   );

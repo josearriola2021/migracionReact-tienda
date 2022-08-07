@@ -14,17 +14,17 @@ const Productos = ({ estadoBuscador, estadoCategoria, activeBuscador, estadoOrde
     fetchDataApi();
   },[]);
 
-  const agregarButton = document.querySelectorAll(".agregar-button");
-  const cantidadProductosAgregados = document.querySelectorAll(
-    ".cantidad-productosagregados"
-  );
+  // const agregarButton = document.querySelectorAll(".agregar-button");
+  // const cantidadProductosAgregados = document.querySelectorAll(
+  //   ".cantidad-productosagregados"
+  // );
 
-  agregarButton.forEach((element, index) => {
-    element.addEventListener("click", () => {
-      element.classList.add("hidden");
-      cantidadProductosAgregados[index].classList.remove("hidden");
-    });
-  });
+  // agregarButton.forEach((element, index) => {
+  //   element.addEventListener("click", () => {
+  //     element.classList.add("hidden");
+  //     cantidadProductosAgregados[index].classList.remove("hidden");
+  //   });
+  // });
 
   const resultadoBuscador = data.productos?.filter((producto) =>
     producto.nombre.toLowerCase().includes(estadoBuscador.toLowerCase())

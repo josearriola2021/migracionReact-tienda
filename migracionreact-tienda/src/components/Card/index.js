@@ -1,14 +1,30 @@
 // import '../json/data.json';
 import "../../index.css";
+import {useContext, useState} from "react";
+import {CarritoComprasContext} from "../../context";
+import {Button, InputNumber} from "antd";
+import {DeleteOutlined} from '@ant-design/icons';
 import {Link} from "react-router-dom";
 
 const Card = ({producto}) => {
 
   const {id, nombre, imagen, precio} = producto;
+  const [size, setSize] = useState('large');
+  const [buttonSecondary, setButtonSecondary] = useState(true)
 
-  const onChange = (e) => {
-    console.log(e.target.value);
+  const onChange = (value) => {
+    value == 0 && setButtonSecondary(true);
   }
+
+  //Activa el boton secundario para seleccionar la cantidad de productos a agregar al carrito
+  const activeButtonSecondary = (e) => {
+    
+    console.log(e.target.value);
+    buttonSecondary ? 
+    setButtonSecondary(false) : setButtonSecondary(true);
+  }
+
+  const {addProducto} = useContext(CarritoComprasContext);
 
   return (
     <div
@@ -24,11 +40,33 @@ const Card = ({producto}) => {
         <h2 className="card-title text-base">{nombre}</h2>
         <p className="text-red-500 font-bold text-base">S/. {precio}</p>
         <div className="card-actions justify-end agregar-button">
-          <button className="md:scale-90 btn text-sm btn-primary">
+          {buttonSecondary ? (
+            <Button
+              type="primary"
+              shape="round"
+              size={size}
+              onClick={activeButtonSecondary}
+            >
+              Agregar
+            </Button>
+          ) : (
+            <Button
+              type="primary"
+              shape="round"
+              size={size}
+            >
+              <div className="flex justify-center items-center gap-2">
+                <DeleteOutlined style={{fontSize:"20px"}} />
+                <InputNumber min={0} max={100} defaultValue={1} onChange={onChange}/>
+              </div>
+            </Button>
+          )}
+
+          {/* <button className="md:scale-90 btn text-sm btn-primary">
             Agregar
-          </button>
+          </button> */}
         </div>
-        <div className="form-control hidden cantidad-productosagregados">
+        {/* <div className="form-control hidden cantidad-productosagregados">
           <label>
             <span
               className="cursor-pointer border-2 border-black delete-product"
@@ -51,7 +89,7 @@ const Card = ({producto}) => {
               <i className="bi bi-plus-circle text-2xl"></i>
             </span>
           </label>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 export const AuthContext = createContext();
 
-const AuthProvider = ({children}) => {
+export const AuthProvider = ({children}) => {
     //Lo setea desde un inicio
     const userStorage = JSON.parse(localStorage.getItem("userAuth")) || "Iniciar Sesión";
     const [userAuth, setUserAuth] = useState(userStorage);
@@ -62,6 +62,5 @@ const AuthProvider = ({children}) => {
 
     return ( <AuthContext.Provider value={{userAuth, setUserAuth, login, logout}}>{children}</AuthContext.Provider> );
 
-}
+};
  
-export default AuthProvider;

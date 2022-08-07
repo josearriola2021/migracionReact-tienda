@@ -1,1 +1,2 @@
-export { default as AuthProvider } from "./AuthContext";
+export {AuthContext, AuthProvider} from "./AuthContext";
+export {CarritoComprasContext, CarritoComprasProvider,} from "./CarritoComprasContext";

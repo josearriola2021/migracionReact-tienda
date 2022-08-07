@@ -3,6 +3,7 @@ import { AppleOutlined } from '@ant-design/icons';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 const { Title } = Typography;
 const { TabPane } = Tabs;
+
 const  PresentacionInfo = ({data, nombre, id}) => {
 
     const searchProductoId = data.productos?.filter((producto) => {
@@ -14,7 +15,7 @@ const  PresentacionInfo = ({data, nombre, id}) => {
   })
 
     const PagosEntrega = () => {
-        return (
+      return (
         <Card>
           <Title level={5}>Producto entregado por</Title>
           <p>Ecommerce</p>
@@ -24,11 +25,13 @@ const  PresentacionInfo = ({data, nombre, id}) => {
               Tipo de entrega disponible
             </Title>
             <div className="mb-3">
-              <i className="bi bi-truck text-3xl text-red-500"></i>&nbsp;&nbsp;&nbsp;
+              <i className="bi bi-truck text-3xl text-red-500"></i>
+              &nbsp;&nbsp;&nbsp;
               <span className="text-gray-500">Delivery Programado</span>
             </div>
             <div>
-              <i className="bi bi-shop text-3xl text-red-500"></i>&nbsp;&nbsp;&nbsp;
+              <i className="bi bi-shop text-3xl text-red-500"></i>
+              &nbsp;&nbsp;&nbsp;
               <span className="text-gray-500">Recojo en Tienda </span>
             </div>
           </div>
@@ -37,14 +40,16 @@ const  PresentacionInfo = ({data, nombre, id}) => {
             <Title level={5} strong>
               Métodos de pago
             </Title>
-            <p className="m-0" >Diversas formas de pago</p>
-            <img className="mt-3"
+            <p className="m-0">Diversas formas de pago</p>
+            <img
+              className="mt-3"
               width="150"
               src="https://smaregi.jp/shared/img/cashless/cashless-logo-credit.png"
             />
           </div>
-        </Card>)
-      };
+        </Card>
+      );
+    };
 
     return (
       <>
@@ -96,11 +101,11 @@ const  PresentacionInfo = ({data, nombre, id}) => {
             </div>
             {/* Especificaciones */}
             <div className="mt-16 flex flex-col items-center">
-              <div className="md:w-3/5">
+              <div className="w-full md:w-3/5">
                 <Title level={3} className="text-center">
                   Sobre este Producto
                 </Title>
-                <Tabs defaultActiveKey="1" size="large" centered>
+                <Tabs defaultActiveKey="1" size="large" className='w-full' centered>
                   <TabPane
                     tab={
                       <span>
@@ -111,7 +116,7 @@ const  PresentacionInfo = ({data, nombre, id}) => {
                     key="1"
                   >
                     {searchEspecificacionesId && (
-                      <table className="table w-full">
+                      <table className="table">
                         <tbody>
                           {searchEspecificacionesId[0].descripcion?.map(
                             (elemento) => {
