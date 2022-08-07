@@ -1,26 +1,12 @@
-import React, {useContext, useRef, useState } from 'react';
-import {IniciarSesion, Registrarse} from "../../components"
-import { Input } from 'antd';
+import { useContext ,useRef } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import "../../json/data.json";
-import "../../css/Header.css";
 
-// import { PoweroffOutlined } from '@ant-design/icons'; //Para loading
+const HeaderTemplate = ({ children, setIsModalVisible }) => {
 
-const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
+    const inicioSesionHeaderItems = useRef();
+    const {userAuth, logout} = useContext(AuthContext);
 
-  const inicioSesionHeaderItems = useRef();
-
-  //Estado inicial de modal: Iniciar Sesion
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const {userAuth, logout} = useContext(AuthContext);
-  //Estado inicial de modal: Registrarse
-  const [isModalVisibleRegistrarse, setIsModalVisibleRegistrarse] =
-    useState(false);
-
-  //Eventos para abrir login
+//Eventos para abrir login
   const showModal = () => {
     if (userAuth != "Iniciar Sesión") {
       setIsModalVisible(false);
@@ -30,21 +16,7 @@ const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
     }
   };
 
-  //buscador
-  const { Search } = Input;
-  const onSearch = (value) => {
-    setActiveBuscador(true); //Para que se renderice en Tienda.js lo seleccionado en el buscador
-    setEstadoBuscador(value); //Asigna a estadoBuscador el valor asignado en el input
-    setCheckedList([]); //Limpia los checkbox cuando uso el buscador
-  }; 
-
-  //limpia el buscador cuando no existe ninguna entrada
-  const onClear = (e) => {
-    e.target.value === "" ? setEstadoBuscador(e.target.value) : console.log("");
-  };
-
-  return (
-    <>
+    return (
       <header className="sticky top-0 z-10">
         <div className="navbar bg-base-100">
           <div className="md:block hidden" style={{ flex: "3" }}>
@@ -53,12 +25,7 @@ const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
           <div className="md:flex-none justify-end gap-2" style={{ flex: "6" }}>
             {/* Buscador */}
             <div className="form-control w-full">
-              <Search
-                placeholder="input search text"
-                onSearch={onSearch}
-                enterButton
-                onChange={onClear}
-              />
+                {children}
             </div>
             {/* Icono de logueo */}
             <div className="dropdown dropdown-end" id="inicioSesionHeader">
@@ -128,18 +95,7 @@ const Header = ({setEstadoBuscador, setActiveBuscador, setCheckedList }) => {
           </div>
         </div>
       </header>
-      <Registrarse
-        isModalVisibleRegistrarse={isModalVisibleRegistrarse}
-        setIsModalVisibleRegistrarse={setIsModalVisibleRegistrarse}
-      />
-      <IniciarSesion
-        isModalVisible={isModalVisible}
-        setIsModalVisible={setIsModalVisible}
-        setIsModalVisibleRegistrarse={setIsModalVisibleRegistrarse}
-      />
-      {/* <Outlet /> */}
-    </>
-  );
+    );
 }
  
-export default Header;
+export default HeaderTemplate;

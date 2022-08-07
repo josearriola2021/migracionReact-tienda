@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {Header, Productos, Categoria, Ordenar } from "../../components";
+import {Productos, Categoria, Ordenar, HeaderPrincipal } from "../../components";
 import '../../App.css';
 import '../../index.css';
 import 'antd/dist/antd.css';
@@ -16,7 +16,7 @@ function Principal() {
 
   return (
     <>
-      <Header
+      <HeaderPrincipal
         setEstadoBuscador={setEstadoBuscador}
         setActiveBuscador={setActiveBuscador}
         setCheckedList={setCheckedList}
