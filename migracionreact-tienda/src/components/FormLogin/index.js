@@ -1,6 +1,6 @@
-import {Button, Checkbox, Form, Input} from "antd";
 import { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
+import {Button, Checkbox, Form, Input} from "antd";
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 const FormLogin = ({loadings, enterLoading, showModalRegistrarse}) => {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Modal } from 'antd'; 
 import { notification} from 'antd';
-import FormLogin from './FormLogin';
+import {FormLogin} from '../../components';
 
 const IniciarSesion  = ({isModalVisible, setIsModalVisible, setIsModalVisibleRegistrarse}) => {
 

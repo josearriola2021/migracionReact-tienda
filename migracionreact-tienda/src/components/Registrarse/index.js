@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Modal } from 'antd'; //Para abrir modal
 import { Button, Checkbox, Form, Input, notification} from 'antd'; //Para formulario de iniciar sesion
-import validacionRegistrarse from '../utils/Registrarse';
+import { Modal } from 'antd'; //Para abrir modal
+import validacionRegistrarse from '../../utils/Registrarse';
 
 const Registrarse = ({isModalVisibleRegistrarse, setIsModalVisibleRegistrarse }) => {
   

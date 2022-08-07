@@ -1,11 +1,10 @@
 import React, {useContext, useRef, useState } from 'react';
-import IniciarSesion from './IniciarSesion';
-import Registrarse from './Registrarse';
+import {IniciarSesion, Registrarse} from "../../components"
 import { Input } from 'antd';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import "../json/data.json";
-import "../css/Header.css";
+import "../../json/data.json";
+import "../../css/Header.css";
 
 // import { PoweroffOutlined } from '@ant-design/icons'; //Para loading
 

@@ -1,13 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Principal from "../pages/Principal";
-import ProductosInfo from "../pages/ProductosInfo";
+import { PrincipalView, ProductosInfoView } from "../pages";
 
 const Router = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Principal />} />
-                <Route path="/:nombre/:id" element={<ProductosInfo />} />
+                <Route path="/" element={<PrincipalView />} />
+                <Route path="/:nombre/:id" element={<ProductosInfoView />} />
             </Routes>
         </BrowserRouter>
       );

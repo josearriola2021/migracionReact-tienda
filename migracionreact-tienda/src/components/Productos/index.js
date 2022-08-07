@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import Card from './Card';
-import { fetchApi } from '../services';
+import {Card} from '../../components';
+import { fetchApi } from '../../services';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const Productos = ({ estadoBuscador, estadoCategoria, activeBuscador, estadoOrdenar, setData, data}) => {
