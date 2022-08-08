@@ -1,10 +1,10 @@
 // import '../json/data.json';
-import "../../index.css";
 import {useContext, useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import {CarritoComprasContext} from "../../context";
 import {Button, InputNumber} from "antd";
-import {CodeSandboxCircleFilled, DeleteOutlined} from '@ant-design/icons';
-import {Link} from "react-router-dom";
+import {DeleteOutlined} from '@ant-design/icons';
+import "../../index.css";
 
 const Card = ({producto}) => {
 
@@ -20,15 +20,17 @@ const Card = ({producto}) => {
     setNewValorInput(value);
     if (value == 0) {
       value == 0 && setButtonSecondary(true);
+      setNewValorInput(1); //Setea el valor del input a 1 luego de ser eliminado
       removeProducto(id);
       return;
     }
-    updateProducto(id, value);
+    updateProducto(id, value, precio);
   };
 
   //Borrar producto mediante el icono de delete
   const deleteProducto = () => {
     setButtonSecondary(true);
+    setNewValorInput(1); //Setea el valor del input a 1 luego de ser eliminado
     removeProducto(id);
   }
 
@@ -43,8 +45,8 @@ const Card = ({producto}) => {
 
   useEffect(() => {
     const estadoProductoSeleccionado = isIncludeInProductosAgregados(id);
-    setButtonSecondary(estadoProductoSeleccionado);
-    const valorInput = capturarValorInput(id);
+    setButtonSecondary(estadoProductoSeleccionado); //Captura el boton al momento de refrescar
+    const valorInput = capturarValorInput(id); //Captura el valor del Input al momento de refrescar
     valorInput !== undefined && setNewValorInput(valorInput);
   }, [])
 
@@ -83,35 +85,7 @@ const Card = ({producto}) => {
               </div>
             </Button>
           )}
-
-          {/* <button className="md:scale-90 btn text-sm btn-primary">
-            Agregar
-          </button> */}
         </div>
-        {/* <div className="form-control hidden cantidad-productosagregados">
-          <label>
-            <span
-              className="cursor-pointer border-2 border-black delete-product"
-              style={{ borderRadius: "50%", padding: "6px" }}
-            >
-              <i className="bi bi-trash3"></i>
-            </span>
-            <span className="cursor-pointer hidden minus-product">
-              <i className="bi bi-dash-circle text-2xl"></i>
-            </span>
-            <input
-              type="text"
-              value="1"
-              onChange={onChange}
-              className="input input-bordered cantidadproductos-input"
-              id={nombre}
-              style={{ width: "70px" }}
-            />
-            <span className="cursor-pointer add-product">
-              <i className="bi bi-plus-circle text-2xl"></i>
-            </span>
-          </label>
-        </div> */}
       </div>
     </div>
   );

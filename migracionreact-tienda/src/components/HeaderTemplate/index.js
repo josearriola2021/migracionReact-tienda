@@ -1,10 +1,12 @@
 import { useContext ,useRef } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { CarritoComprasContext } from '../../context';
 
 const HeaderTemplate = ({ children, setIsModalVisible }) => {
 
     const inicioSesionHeaderItems = useRef();
     const { userAuth, logout } = useContext(AuthContext);
+    const { productosAgregados, sumaProductos, totalProductos } = useContext(CarritoComprasContext);
 
     //Eventos para abrir login
     const showModal = () => {
@@ -66,7 +68,7 @@ const HeaderTemplate = ({ children, setIsModalVisible }) => {
                     className="badge badge-sm indicator-item"
                     id="indicadorItem"
                   >
-                    0
+                    {totalProductos}
                   </span>
                 </figure>
               </label>
@@ -79,10 +81,10 @@ const HeaderTemplate = ({ children, setIsModalVisible }) => {
                     className="font-bold text-lg text-black"
                     id="cantidadProductosSpan"
                   >
-                    0 productos
+                    {totalProductos}
                   </span>
                   <span className="text-info" id="totalPrecioSpan">
-                    Total: S/0
+                    Total: S/ {sumaProductos}
                   </span>
                   <div className="card-actions">
                     <button className="btn btn-primary btn-block" id="viewCart">
