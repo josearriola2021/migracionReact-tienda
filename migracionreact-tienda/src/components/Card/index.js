@@ -3,28 +3,36 @@ import "../../index.css";
 import {useContext, useEffect, useState} from "react";
 import {CarritoComprasContext} from "../../context";
 import {Button, InputNumber} from "antd";
-import {DeleteOutlined} from '@ant-design/icons';
+import {CodeSandboxCircleFilled, DeleteOutlined} from '@ant-design/icons';
 import {Link} from "react-router-dom";
 
 const Card = ({producto}) => {
 
   const {id, nombre, imagen, precio} = producto;
   const [size, setSize] = useState('large');
-  const [buttonSecondary, setButtonSecondary] = useState(true)
+  const [buttonSecondary, setButtonSecondary] = useState(true);
+  const [newValorInput, setNewValorInput] = useState(1);
 
-  const {addProducto, isIncludeInProductosAgregados, removeProducto} = useContext(CarritoComprasContext);
+  const {addProducto, capturarValorInput, isIncludeInProductosAgregados, removeProducto, updateProducto} = useContext(CarritoComprasContext);
 
+  //Remueve producto visual y del localStorage mediant el InputNumber
   const onChange = (value) => {
-    value == 0 && setButtonSecondary(true);
-    removeProducto(id);
-  }
+    setNewValorInput(value);
+    if (value == 0) {
+      value == 0 && setButtonSecondary(true);
+      removeProducto(id);
+      return;
+    }
+    updateProducto(id, value);
+  };
 
+  //Borrar producto mediante el icono de delete
   const deleteProducto = () => {
     setButtonSecondary(true);
     removeProducto(id);
   }
 
-  //Activa el boton secundario para seleccionar la cantidad de productos a agregar al carrito
+  //Activa el boton secundario y agregar el producto
   const activeButtonSecondary = (e) => {
     buttonSecondary ? 
     setButtonSecondary(false) : setButtonSecondary(true);
@@ -34,9 +42,11 @@ const Card = ({producto}) => {
   }
 
   useEffect(() => {
-    const pintado = isIncludeInProductosAgregados(id);
-    setButtonSecondary(pintado);
-  }, [buttonSecondary])
+    const estadoProductoSeleccionado = isIncludeInProductosAgregados(id);
+    setButtonSecondary(estadoProductoSeleccionado);
+    const valorInput = capturarValorInput(id);
+    valorInput !== undefined && setNewValorInput(valorInput);
+  }, [])
 
   return (
     <div
@@ -69,7 +79,7 @@ const Card = ({producto}) => {
             >
               <div className="flex justify-center items-center gap-2">
                 <DeleteOutlined style={{fontSize:"20px"}} onClick={deleteProducto}/>
-                <InputNumber min={0} max={100} defaultValue={1} onChange={onChange}/>
+                <InputNumber min={0} max={100} defaultValue={1} value={newValorInput} onChange={onChange}/>
               </div>
             </Button>
           )}

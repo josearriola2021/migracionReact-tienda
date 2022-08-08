@@ -20,6 +20,7 @@ export const CarritoComprasProvider = ({children}) => {
         created_add: new Date(),
         nombre,
         precio,
+        valor: 1
       };
 
       if (productosAgregados.length === 0) {
@@ -30,6 +31,19 @@ export const CarritoComprasProvider = ({children}) => {
       productosAgregados[productosAgregados.length] = productoAgregado;
       setProductosAgregados(productosAgregados) ;
       saveInLocalStorage(productosAgregados);
+    };
+
+    const updateProducto = (id, newValue) => {
+      const indexNewProducto = productosAgregados.findIndex(
+        (producto) => producto.id === id
+      );
+      productosAgregados[indexNewProducto] = {
+        ...productosAgregados[indexNewProducto],
+        valor: newValue,
+      };
+      setProductosAgregados(productosAgregados);
+      saveInLocalStorage(productosAgregados);
+
     };
 
     const removeProducto = (id) => {
@@ -47,8 +61,16 @@ export const CarritoComprasProvider = ({children}) => {
         return producto === -1 ? true : false;
     }
 
+    const capturarValorInput = (id) => {
+        const indexNewProducto = productosAgregados.findIndex((producto) => producto.id === id);
+        if (indexNewProducto !== -1) {
+            const valorInput = productosAgregados[indexNewProducto].valor;
+            return valorInput; 
+        }
+    }
+
     return (
-        <CarritoComprasContext.Provider value={{productosAgregados, addProducto, isIncludeInProductosAgregados, removeProducto}}>
+        <CarritoComprasContext.Provider value={{productosAgregados, addProducto, capturarValorInput, isIncludeInProductosAgregados, removeProducto, updateProducto}}>
             {children}
         </CarritoComprasContext.Provider>
     );
