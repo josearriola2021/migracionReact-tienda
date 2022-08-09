@@ -1,4 +1,4 @@
-import { useContext ,useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { CarritoComprasContext } from '../../context';
 import {Link} from "react-router-dom"
@@ -7,7 +7,7 @@ const HeaderTemplate = ({ children, setIsModalVisible }) => {
 
     const inicioSesionHeaderItems = useRef();
     const { userAuth, logout } = useContext(AuthContext);
-    const { productosAgregados, sumaProductos, totalProductos } = useContext(CarritoComprasContext);
+    const { contador, productosAgregados, sumaProductos, totalProductos } = useContext(CarritoComprasContext);
 
     //Eventos para abrir login
     const showModal = () => {
@@ -18,6 +18,10 @@ const HeaderTemplate = ({ children, setIsModalVisible }) => {
         setIsModalVisible(true);
       }
     };
+
+    useEffect(() => {
+        contador(productosAgregados); //Para que no se pierda el valor cuando se refresque
+    }, [])
 
     return (
       <header className="sticky top-0 z-10">

@@ -6,8 +6,8 @@ const Profile = () => {
 
     const {userAuth, users} = useContext(AuthContext);
 
-    const datosPersonales = users.filter(user => user.nickname === userAuth);
-    console.log(datosPersonales);
+    const datosPersonales = users.filter(user => user.nickname === userAuth); 
+    //Traigo el objeto que coincide con el userAuth
 
     return (
         <>

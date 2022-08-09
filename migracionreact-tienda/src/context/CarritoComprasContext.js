@@ -8,8 +8,8 @@ export const CarritoComprasProvider = ({children}) => {
     //Captura los productos guardados en el local Storage cuando refrezco mi navegador
     const agregados = JSON.parse(localStorage.getItem("carritoCompras")) || [];
     const [productosAgregados, setProductosAgregados] = useState(agregados);
-    const [totalProductos, setTotalProductos] = useState(0);
-    const [sumaProductos, setSumaProductos] = useState(0);
+    const [totalProductos, setTotalProductos] = useState(0); //Para el contador del header
+    const [sumaProductos, setSumaProductos] = useState(0); //Para del contador del header
 
     const {userAuth} = useContext(AuthContext);
 
@@ -24,8 +24,9 @@ export const CarritoComprasProvider = ({children}) => {
     }
 
     const contador = (productosAgregados) => {
-        const contadorCantidadProductos = productosAgregados.map(producto => producto.valor).reduce((a,b) => a+b,0);
-        const contadorPrecioProductos = productosAgregados.map(producto => producto.total).reduce((a,b) => a+b,0);
+        const productosUser = productosAgregados.filter(producto => producto.user === userAuth);
+        const contadorCantidadProductos = productosUser.map(producto =>producto.valor).reduce((a,b) => a+b,0);
+        const contadorPrecioProductos = productosUser.map(producto => producto.total).reduce((a,b) => a+b,0);
         setTotalProductos(contadorCantidadProductos);
         setSumaProductos(contadorPrecioProductos);
     }
@@ -89,7 +90,7 @@ export const CarritoComprasProvider = ({children}) => {
     }
 
     return (
-        <CarritoComprasContext.Provider value={{productosAgregados, addProducto, capturarValorInput, isIncludeInProductosAgregados, removeProducto, sumaProductos, totalProductos, updateProducto}}>
+        <CarritoComprasContext.Provider value={{productosAgregados, addProducto, capturarValorInput, contador, isIncludeInProductosAgregados, removeProducto, sumaProductos, totalProductos, updateProducto}}>
             {children}
         </CarritoComprasContext.Provider>
     );
