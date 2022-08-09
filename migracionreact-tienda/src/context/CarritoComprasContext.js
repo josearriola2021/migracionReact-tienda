@@ -33,11 +33,12 @@ export const CarritoComprasProvider = ({children}) => {
         setProductosOfUser(productosUser); //Actualiza los productos por usuario
     }
 
-    const addProducto = (id, nombre, precio) => {
+    const addProducto = (id, nombre, precio, imagen) => {
       const valor = 1;
       const productoAgregado = {
         id,
         user: userAuth,
+        imagen: imagen,
         created_add: new Date(),
         nombre,
         precio,

@@ -39,7 +39,7 @@ const Card = ({producto}) => {
     buttonSecondary ? 
     setButtonSecondary(false) : setButtonSecondary(true);
     if (buttonSecondary == true) {
-      addProducto(id, nombre, precio);
+      addProducto(id, nombre, precio, imagen);
     }
   }
 
