@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { AuthContext } from "./AuthContext";
 
 export const CarritoComprasContext = createContext();
 
@@ -9,6 +10,8 @@ export const CarritoComprasProvider = ({children}) => {
     const [productosAgregados, setProductosAgregados] = useState(agregados);
     const [totalProductos, setTotalProductos] = useState(0);
     const [sumaProductos, setSumaProductos] = useState(0);
+
+    const {userAuth} = useContext(AuthContext);
 
     //para poder guardar el producto agregado en el carrito de compras
     /**
@@ -31,6 +34,7 @@ export const CarritoComprasProvider = ({children}) => {
       const valor = 1;
       const productoAgregado = {
         id,
+        user: userAuth,
         created_add: new Date(),
         nombre,
         precio,
@@ -72,7 +76,7 @@ export const CarritoComprasProvider = ({children}) => {
     }
 
     const isIncludeInProductosAgregados = (id) => {
-        const producto = productosAgregados.findIndex((producto) => producto.id === id);
+        const producto = productosAgregados.findIndex((producto) => producto.id === id && producto.user === userAuth);
         return producto === -1 ? true : false;
     }
 

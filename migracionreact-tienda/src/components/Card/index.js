@@ -13,7 +13,7 @@ const Card = ({producto}) => {
   const [buttonSecondary, setButtonSecondary] = useState(true);
   const [newValorInput, setNewValorInput] = useState(1);
 
-  const {addProducto, capturarValorInput, isIncludeInProductosAgregados, removeProducto, updateProducto} = useContext(CarritoComprasContext);
+  const {addProducto, buttonAfterLogout, capturarValorInput, isIncludeInProductosAgregados, removeProducto, updateProducto} = useContext(CarritoComprasContext);
 
   //Remueve producto visual y del localStorage mediant el InputNumber
   const onChange = (value) => {

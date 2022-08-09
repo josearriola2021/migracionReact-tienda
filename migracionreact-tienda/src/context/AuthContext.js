@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { Productos } from "../components";
 
 export const AuthContext = createContext();
 
@@ -48,16 +49,30 @@ export const AuthProvider = ({children}) => {
           userAdmin != ""
             ? setUserAuth(userAdmin[0].nickname)
             : setUserAuth(userRegistrado[0].nickname);
+          window.location.href="/"
         }, 4000);
       }
     }
 
     function logout(){
       localStorage.removeItem("userAuth");
+      removeProductosIniciarSesion();
       window.location.href = "/";
       setTimeout(() => {
         setUserAuth("Iniciar Sesión");
       }, 4000)
+    }
+
+    //Crea el mismo carritoCompras 
+    function saveProductos(productosIniciarSesion){
+      localStorage.setItem("carritoCompras", JSON.stringify(productosIniciarSesion));
+    }
+
+    //Remueve los productos de iniciar sesión al momento de desloguearse
+    function removeProductosIniciarSesion(){
+      const productoStorageCarritoCompras = JSON.parse(localStorage.getItem("carritoCompras"));
+      const productosIniciarSesion = productoStorageCarritoCompras.filter(producto => producto.user !== "Iniciar Sesión");
+      saveProductos(productosIniciarSesion);
     }
 
     return ( <AuthContext.Provider value={{userAuth, setUserAuth, login, logout}}>{children}</AuthContext.Provider> );
