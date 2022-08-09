@@ -7,12 +7,12 @@ export const AuthProvider = ({children}) => {
     //Lo setea desde un inicio
     const userStorage = JSON.parse(localStorage.getItem("userAuth")) || "Iniciar Sesión";
     const [userAuth, setUserAuth] = useState(userStorage);
+    const jsonUsers = require("../json/data.json");
+    const users = jsonUsers["users"];
 
     function login(values, enterLoading) {
       const validacionEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
       const result = validacionEmail.test(values.email);
-      const jsonUsers = require("../json/data.json");
-      const users = jsonUsers["users"];
       //Validacion de Inicio de Sesion con los usuarios del json
       const userAdmin = users.filter((user) => {
         return (
@@ -75,7 +75,7 @@ export const AuthProvider = ({children}) => {
       saveProductos(productosIniciarSesion);
     }
 
-    return ( <AuthContext.Provider value={{userAuth, setUserAuth, login, logout}}>{children}</AuthContext.Provider> );
+    return ( <AuthContext.Provider value={{userAuth, setUserAuth, login, logout, users}}>{children}</AuthContext.Provider> );
 
 };
  

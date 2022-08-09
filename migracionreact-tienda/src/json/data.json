@@ -2,12 +2,24 @@
     {
         "email": "joseluisperez1718@gmail.com",
         "password": "1234",
-        "nickname": "Jose"
+        "nickname": "Jose",
+        "telefono": "999444123",
+        "distrito": "Chiclayo",
+        "provincia": "Chiclayo",
+        "departamento": "Lambayeque",
+        "pais": "Peru",
+        "dirección": "Av. Las Flores 123, Urb Remigio Silva"
     },
     {
         "email": "brunodiaz@gmail.com",
         "password": "1111",
-        "nickname": "Bruno"
+        "nickname": "Bruno",
+        "telefono": "982444123",
+        "distrito": "Miraflores",
+        "provincia": "Lima",
+        "departamento": "Lima",
+        "pais": "Peru",
+        "dirección": "Av. Arequipa 145 Miraflores"
     }
   ]
 }

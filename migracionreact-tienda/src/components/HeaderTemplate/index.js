@@ -1,6 +1,7 @@
 import { useContext ,useRef } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { CarritoComprasContext } from '../../context';
+import {Link} from "react-router-dom"
 
 const HeaderTemplate = ({ children, setIsModalVisible }) => {
 
@@ -49,10 +50,10 @@ const HeaderTemplate = ({ children, setIsModalVisible }) => {
                 ref={inicioSesionHeaderItems}
               >
                 <li>
-                  <a className="justify-between">
+                  <Link to={`/profile/${userAuth}`} className="justify-between">
                     Profile
                     <span className="badge">New</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a onClick={logout}>Logout</a>
