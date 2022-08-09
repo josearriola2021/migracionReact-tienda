@@ -8,6 +8,7 @@ export const CarritoComprasProvider = ({children}) => {
     //Captura los productos guardados en el local Storage cuando refrezco mi navegador
     const agregados = JSON.parse(localStorage.getItem("carritoCompras")) || [];
     const [productosAgregados, setProductosAgregados] = useState(agregados);
+    const [productosOfUser, setProductosOfUser] = useState(agregados);
     const [totalProductos, setTotalProductos] = useState(0); //Para el contador del header
     const [sumaProductos, setSumaProductos] = useState(0); //Para del contador del header
 
@@ -28,7 +29,8 @@ export const CarritoComprasProvider = ({children}) => {
         const contadorCantidadProductos = productosUser.map(producto =>producto.valor).reduce((a,b) => a+b,0);
         const contadorPrecioProductos = productosUser.map(producto => producto.total).reduce((a,b) => a+b,0);
         setTotalProductos(contadorCantidadProductos);
-        setSumaProductos(contadorPrecioProductos);
+        setSumaProductos(contadorPrecioProductos.toFixed(2));
+        setProductosOfUser(productosUser); //Actualiza los productos por usuario
     }
 
     const addProducto = (id, nombre, precio) => {
@@ -90,7 +92,7 @@ export const CarritoComprasProvider = ({children}) => {
     }
 
     return (
-        <CarritoComprasContext.Provider value={{productosAgregados, addProducto, capturarValorInput, contador, isIncludeInProductosAgregados, removeProducto, sumaProductos, totalProductos, updateProducto}}>
+        <CarritoComprasContext.Provider value={{productosAgregados, productosOfUser, addProducto, capturarValorInput, contador, isIncludeInProductosAgregados, removeProducto, sumaProductos, totalProductos, updateProducto}}>
             {children}
         </CarritoComprasContext.Provider>
     );
