@@ -45,7 +45,6 @@ export const CarritoComprasProvider = ({children}) => {
         valor: valor,
         total: precio * valor,
       };
-
       // if (buttonSecondary == true) {
       //   const indexNewProducto = productosAgregados.findIndex(
       //     (producto) => producto.id === id
@@ -55,7 +54,6 @@ export const CarritoComprasProvider = ({children}) => {
       //     valor: 1,
       //   };
       // }
-
       if (productosAgregados.length === 0) {
         setProductosAgregados([productoAgregado]);
         saveInLocalStorage([productoAgregado]);
@@ -70,7 +68,7 @@ export const CarritoComprasProvider = ({children}) => {
 
     const updateProducto = (id, newValue, precio) => {
       const indexNewProducto = productosAgregados.findIndex(
-        (producto) => producto.id === id
+        (producto) => producto.id === id && producto.user === userAuth
       );
       productosAgregados[indexNewProducto] = {
         ...productosAgregados[indexNewProducto],
@@ -83,10 +81,12 @@ export const CarritoComprasProvider = ({children}) => {
     };
 
     const removeProducto = (id) => {
-        const newProductosAgregados = productosAgregados.filter((producto) => producto.id !==id );
-        setProductosAgregados(newProductosAgregados);
-        saveInLocalStorage(newProductosAgregados);
-        contador(newProductosAgregados);
+      const indexNewProductoRemoved = productosAgregados.findIndex(producto => producto.id === id && producto.user === userAuth);
+      productosAgregados.splice(indexNewProductoRemoved, 1);
+        // const newProductosAgregados = productosAgregados.filter((producto) => producto.id !==id );
+        setProductosAgregados(productosAgregados);
+        saveInLocalStorage(productosAgregados);
+        contador(productosAgregados);
     }
 
     const isIncludeInProductosAgregados = (id) => {

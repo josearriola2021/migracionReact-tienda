@@ -4,7 +4,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 const { Title } = Typography;
 const { TabPane } = Tabs;
 
-const  PresentacionInfo = ({data, nombre, id}) => {
+const PresentacionProducto = ({data, nombre, id}) => {
 
     const searchProductoId = data.productos?.filter((producto) => {
         return producto.id == id;
@@ -119,9 +119,9 @@ const  PresentacionInfo = ({data, nombre, id}) => {
                       <table className="table">
                         <tbody>
                           {searchEspecificacionesId[0].descripcion?.map(
-                            (elemento) => {
+                            (elemento, index) => {
                               return (
-                                <tr className="text-base">
+                                <tr className="text-base" key={index}>
                                   <td className="font-semibold p-0">
                                     {elemento.titulo}
                                   </td>
@@ -143,4 +143,4 @@ const  PresentacionInfo = ({data, nombre, id}) => {
     );
 }
  
-export default PresentacionInfo;
+export default PresentacionProducto;

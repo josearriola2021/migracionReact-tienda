@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { Button, Drawer } from 'antd';
-import {MenuOutlined} from "@ant-design/icons";
 import CategoriaTemplate from '../CategoriaTemplate';
 
 const Categoria = ({setEstadoCategoria, setActiveBuscador, setCheckedList, checkedList, data}) => {

@@ -2,7 +2,7 @@ import { useState } from "react";
 import {HeaderTemplate, IniciarSesion, Registrarse} from "../../components";
 
 
-const HeaderProductosInfo = () => {
+const HeaderProductoInfo = () => {
   //Estado inicial de modal: Iniciar Sesion
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -26,4 +26,4 @@ const HeaderProductosInfo = () => {
   );
 }
  
-export default HeaderProductosInfo;
+export default HeaderProductoInfo;

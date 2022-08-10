@@ -13,7 +13,7 @@ const Card = ({producto}) => {
   const [buttonSecondary, setButtonSecondary] = useState(true);
   const [newValorInput, setNewValorInput] = useState(1);
 
-  const {addProducto, buttonAfterLogout, capturarValorInput, isIncludeInProductosAgregados, removeProducto, updateProducto} = useContext(CarritoComprasContext);
+  const {addProducto, capturarValorInput, isIncludeInProductosAgregados, removeProducto, updateProducto} = useContext(CarritoComprasContext);
 
   //Remueve producto visual y del localStorage mediant el InputNumber
   const onChange = (value) => {
@@ -35,12 +35,13 @@ const Card = ({producto}) => {
   }
 
   //Activa el boton secundario y agregar el producto
-  const activeButtonSecondary = (e) => {
+  const activeButtonSecondary = () => {
     buttonSecondary ? 
     setButtonSecondary(false) : setButtonSecondary(true);
     if (buttonSecondary == true) {
       // setNewValorInput(1);
       addProducto(id, nombre, precio, imagen, buttonSecondary);
+      setNewValorInput(1);
     }
   }
 
