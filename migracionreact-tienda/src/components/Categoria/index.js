@@ -26,8 +26,18 @@ const Categoria = ({setEstadoCategoria, setActiveBuscador, setCheckedList, check
             data={data}
           />
         </div>
-        <div className="sm: absolute -mt-14 ml-4 w-40 md:hidden"><Button onClick={showDrawer}><i class="bi bi-list"></i>&nbsp;<span>Categorías</span></Button>  </div>
-        <Drawer title="Basic Drawer" placement="left" onClose={onClose} visible={visible}>
+        <div className="sm: absolute -mt-14 ml-4 w-40 md:hidden">
+          <Button size="base" onClick={showDrawer} style={{ width: "200px" }}>
+            <i class="bi bi-list"></i>&nbsp;<span>Categorías</span>
+          </Button>
+        </div>
+        <Drawer
+          title="Basic Drawer"
+          placement="left"
+          onClose={onClose}
+          visible={visible}
+          className="md:hidden"
+        >
           <CategoriaTemplate
             setEstadoCategoria={setEstadoCategoria}
             setActiveBuscador={setActiveBuscador}
