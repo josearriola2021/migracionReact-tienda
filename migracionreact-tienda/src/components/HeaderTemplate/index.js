@@ -39,7 +39,7 @@ const HeaderTemplate = ({ children, setIsModalVisible }) => {
         <header className="sticky top-0 z-10">
           <div className="navbar bg-base-100">
             <div className="md:block hidden" style={{ flex: "3" }}>
-              <a className="btn btn-ghost normal-case text-xl">
+              <a href='/' className="btn btn-ghost normal-case text-xl">
                 Tienda Virtual
               </a>
             </div>

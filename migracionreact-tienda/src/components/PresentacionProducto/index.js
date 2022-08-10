@@ -128,12 +128,6 @@ const PresentacionProducto = ({data, nombre, id}) => {
                               <div className="w-full font-semibold">{elemento.titulo}</div>
                               <div className="w-full">{elemento.detalle}</div>
                             </div>
-                            // <tr className="text-base" key={index}>
-                            //   <td className="font-semibold p-0">
-                            //     {elemento.titulo}
-                            //   </td>
-                            //   <td className="pl-0">{elemento.detalle}</td>
-                            // </tr>
                           );
                         }
                       )}
