@@ -105,7 +105,12 @@ const PresentacionProducto = ({data, nombre, id}) => {
                 <Title level={3} className="text-center">
                   Sobre este Producto
                 </Title>
-                <Tabs defaultActiveKey="1" size="large" className='w-full' centered>
+                <Tabs
+                  defaultActiveKey="1"
+                  size="large"
+                  className="w-full"
+                  centered
+                >
                   <TabPane
                     tab={
                       <span>
@@ -115,24 +120,23 @@ const PresentacionProducto = ({data, nombre, id}) => {
                     }
                     key="1"
                   >
-                    {searchEspecificacionesId && (
-                      <table className="table">
-                        <tbody>
-                          {searchEspecificacionesId[0].descripcion?.map(
-                            (elemento, index) => {
-                              return (
-                                <tr className="text-base" key={index}>
-                                  <td className="font-semibold p-0">
-                                    {elemento.titulo}
-                                  </td>
-                                  <td className="pl-0">{elemento.detalle}</td>
-                                </tr>
-                              );
-                            }
-                          )}
-                        </tbody>
-                      </table>
-                    )}
+                    {searchEspecificacionesId &&
+                      searchEspecificacionesId[0].descripcion?.map(
+                        (elemento, index) => {
+                          return (
+                            <div className="flex justify-center w-full border-b-2 border-b-gray-100 p-2" key={index}>
+                              <div className="w-full font-semibold">{elemento.titulo}</div>
+                              <div className="w-full">{elemento.detalle}</div>
+                            </div>
+                            // <tr className="text-base" key={index}>
+                            //   <td className="font-semibold p-0">
+                            //     {elemento.titulo}
+                            //   </td>
+                            //   <td className="pl-0">{elemento.detalle}</td>
+                            // </tr>
+                          );
+                        }
+                      )}
                   </TabPane>
                 </Tabs>
               </div>
