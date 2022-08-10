@@ -39,7 +39,8 @@ const Card = ({producto}) => {
     buttonSecondary ? 
     setButtonSecondary(false) : setButtonSecondary(true);
     if (buttonSecondary == true) {
-      addProducto(id, nombre, precio, imagen);
+      // setNewValorInput(1);
+      addProducto(id, nombre, precio, imagen, buttonSecondary);
     }
   }
 

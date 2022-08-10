@@ -33,8 +33,8 @@ export const CarritoComprasProvider = ({children}) => {
         setProductosOfUser(productosUser); //Actualiza los productos por usuario
     }
 
-    const addProducto = (id, nombre, precio, imagen) => {
-      const valor = 1;
+    const addProducto = (id, nombre, precio, imagen, buttonSecondary) => {
+      const valor=1;
       const productoAgregado = {
         id,
         user: userAuth,
@@ -45,6 +45,16 @@ export const CarritoComprasProvider = ({children}) => {
         valor: valor,
         total: precio * valor,
       };
+
+      // if (buttonSecondary == true) {
+      //   const indexNewProducto = productosAgregados.findIndex(
+      //     (producto) => producto.id === id
+      //   );
+      //   productosAgregados[indexNewProducto] = {
+      //     ...productosAgregados[indexNewProducto],
+      //     valor: 1,
+      //   };
+      // }
 
       if (productosAgregados.length === 0) {
         setProductosAgregados([productoAgregado]);
@@ -73,7 +83,7 @@ export const CarritoComprasProvider = ({children}) => {
     };
 
     const removeProducto = (id) => {
-        const newProductosAgregados = productosAgregados.filter((producto) => producto.id !==id);
+        const newProductosAgregados = productosAgregados.filter((producto) => producto.id !==id );
         setProductosAgregados(newProductosAgregados);
         saveInLocalStorage(newProductosAgregados);
         contador(newProductosAgregados);

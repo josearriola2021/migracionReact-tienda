@@ -9,7 +9,7 @@ const Ordenar = ({setEstadoOrdenar}) => {
   };
 
     return (
-        <div className='hidden md:flex justify-end lg:px-12 sm:px-2 px-4 py-3'>
+        <div className='flex justify-end lg:px-12 sm:px-2 px-4 py-3'>
             <Select
                 defaultValue="Ordenar por"
                 style={{

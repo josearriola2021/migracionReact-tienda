@@ -1,43 +1,42 @@
-import React, { useEffect, useState} from 'react';
-import { Collapse } from 'antd';
-import { Checkbox } from 'antd';
-const CheckboxGroup = Checkbox.Group;
-const { Panel } = Collapse;
+import React, {useState} from 'react';
+import { Button, Drawer } from 'antd';
+import {MenuOutlined} from "@ant-design/icons";
+import CategoriaTemplate from '../CategoriaTemplate';
 
 const Categoria = ({setEstadoCategoria, setActiveBuscador, setCheckedList, checkedList, data}) => {
 
-    const onChange = (e) => {
-      setCheckedList(e); //Permite checkear el valor seleccionado
-      setActiveBuscador(false); //Para renderizar en Tienda.js lo seleccionado en categorias
-      setEstadoCategoria(e); //Asigna a estado categoria la lista de checkbox seleccionados, y por ende filtrar en Tienda.jsx
-      e.length == 0
-        ? setActiveBuscador(true)
-        : console.log("Existen categorias seleccionadas");
-    };
+  const [visible, setVisible] = useState(false);
 
-    let i = 1; //Para darle un key al Panel
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
 
     return (
-      <div className="md:block hidden lg:pl-12 sm:pl-3 pl-4">
-        <Collapse accordion ghost>
-          {data.categorias?.map((element) => {
-            const { nombre } = element;
-            i += 1;
-            return (
-              <Panel header={nombre} key={i}>
-                <div className="flex flex-col">
-                  <CheckboxGroup
-                    options={element["subcategorias"]}
-                    value={checkedList}
-                    onChange={onChange}
-                    style={{ display: "flex", flexDirection: "column" }}
-                  />
-                </div>
-              </Panel>
-            );
-          })}
-        </Collapse>
-      </div>
+      <>
+        <div className="hidden md:block lg:pl-12 sm:pl-3 pl-4">
+          <CategoriaTemplate
+            setEstadoCategoria={setEstadoCategoria}
+            setActiveBuscador={setActiveBuscador}
+            setCheckedList={setCheckedList}
+            checkedList={checkedList}
+            data={data}
+          />
+        </div>
+        <div className="sm: absolute -mt-14 ml-4 w-40 md:hidden"><Button onClick={showDrawer}><i class="bi bi-list"></i>&nbsp;<span>Categorías</span></Button>  </div>
+        <Drawer title="Basic Drawer" placement="left" onClose={onClose} visible={visible}>
+          <CategoriaTemplate
+            setEstadoCategoria={setEstadoCategoria}
+            setActiveBuscador={setActiveBuscador}
+            setCheckedList={setCheckedList}
+            checkedList={checkedList}
+            data={data}
+          />
+        </Drawer>
+      </>
     );
 }
  
