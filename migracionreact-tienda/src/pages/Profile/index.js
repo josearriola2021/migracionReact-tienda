@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context";
-import { Card, Descriptions, Typography,  Radio, Space, Tabs, Divider } from 'antd';
+import { Avatar, Card, Descriptions, Typography,  Radio, Space, Tabs, Divider } from 'antd';
+import { UserOutlined } from "@ant-design/icons";
+import { HeaderTemplate } from "../../components";
 const { TabPane } = Tabs;
 
 const Profile = () => {
@@ -11,14 +13,29 @@ const Profile = () => {
     //Traigo el objeto que coincide con el userAuth
     const tarjeta = datosPersonales[0].tarjeta;
 
+    //Estado inicial de modal: Iniciar Sesion
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  //Estado inicial de modal: Registrarse
+  const [isModalVisibleRegistrarse, setIsModalVisibleRegistrarse] =
+    useState(false);
+
     return (
       <>
+        <HeaderTemplate setIsModalVisible={setIsModalVisible}/>
         <Tabs tabPosition="left">
           <TabPane
             tab={
-              <span>
-                <i class="bi bi-person"></i>&nbsp; Perfil
-              </span>
+              <>
+                <div class="avatar online mb-6">
+                  <div class="w-24 rounded-full">
+                    <img src={datosPersonales[0].imgUser} />
+                  </div>
+                </div>
+                <div className="flex justify-start">
+                  <i class="bi bi-person"></i>&nbsp; Perfil
+                </div>
+              </>
             }
             key="1"
           >
@@ -70,9 +87,11 @@ const Profile = () => {
           >
             <Typography.Title level={2}>Direcciones</Typography.Title>
             <Divider />
-            <Card style={{
-              width: "350px"
-            }}>
+            <Card
+              style={{
+                width: "350px",
+              }}
+            >
               <Typography.Title level={4}>
                 {datosPersonales[0].direccion}
               </Typography.Title>
@@ -80,25 +99,29 @@ const Profile = () => {
                 {datosPersonales[0].ciudad}
               </Typography.Title>
               <Typography.Text>
-                {datosPersonales[0].distrito}, {datosPersonales[0].provincia}, {datosPersonales[0].departamento}
+                {datosPersonales[0].distrito}, {datosPersonales[0].provincia},{" "}
+                {datosPersonales[0].departamento}
               </Typography.Text>
             </Card>
           </TabPane>
-          <TabPane tab={
+          <TabPane
+            tab={
               <span>
                 <i class="bi bi-credit-card"></i>&nbsp; Tarjeta de Crédito
               </span>
-            } key="3">
-              <Typography.Title level={2}>Tarjetas de Crédito</Typography.Title>
-              <Divider />
-            <Card style={{
-              width: "350px"
-            }}>
-              <Typography.Title level={5}>
-                Número de tarjeta
-              </Typography.Title>
+            }
+            key="3"
+          >
+            <Typography.Title level={2}>Tarjetas de Crédito</Typography.Title>
+            <Divider />
+            <Card
+              style={{
+                width: "350px",
+              }}
+            >
+              <Typography.Title level={5}>Número de tarjeta</Typography.Title>
               <div className="flex justify-start items-center gap-2">
-                <img src={datosPersonales[0].urlTarjeta} className="w-32"/>
+                <img src={datosPersonales[0].urlTarjeta} className="w-32" />
                 <Typography.Text>
                   **** **** **** {tarjeta.slice(-4)}
                 </Typography.Text>
