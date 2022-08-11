@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context";
-import { Card, Descriptions, Typography,  Radio, Space, Tabs } from 'antd';
+import { Card, Descriptions, Typography,  Radio, Space, Tabs, Divider } from 'antd';
 const { TabPane } = Tabs;
 
 const Profile = () => {
@@ -9,50 +9,101 @@ const Profile = () => {
 
     const datosPersonales = users.filter(user => user.nickname === userAuth); 
     //Traigo el objeto que coincide con el userAuth
+    const tarjeta = datosPersonales[0].tarjeta;
 
     return (
       <>
         <Tabs tabPosition="left">
-          <TabPane tab="Perfil" key="1">
+          <TabPane
+            tab={
+              <span>
+                <i class="bi bi-person"></i>&nbsp; Perfil
+              </span>
+            }
+            key="1"
+          >
             <div>
               <Typography.Title level={2}>Perfil</Typography.Title>
+              <Divider />
               <Typography.Text style={{ fontSize: "16px" }}>
                 Visualiza tus datos de sesión, correo electrónico y contraseña
               </Typography.Text>
               <Card
                 style={{
                   width: 300,
+                  marginTop: "20px",
                 }}
               >
                 <Typography.Title level={4}>Datos Personales</Typography.Title>
                 <div className="border-b-2 border-b-gray-100 border-dashed py-2">
-                    <label className="font-semibold">Nombre</label>
-                    <div>{datosPersonales[0].nombre}</div>
+                  <label className="font-semibold">Nombre</label>
+                  <div>{datosPersonales[0].nombre}</div>
                 </div>
                 <div className="border-b-2 border-b-gray-100 border-dashed py-2">
-                    <label className="font-semibold">Apellidos</label>
-                    <div>{datosPersonales[0].apellidos}</div>
+                  <label className="font-semibold">Apellidos</label>
+                  <div>{datosPersonales[0].apellidos}</div>
                 </div>
                 <div className="border-b-2 border-b-gray-100 border-dashed py-2">
-                    <label className="font-semibold">E-mail</label>
-                    <div>{datosPersonales[0].email}</div>
+                  <label className="font-semibold">E-mail</label>
+                  <div>{datosPersonales[0].email}</div>
                 </div>
                 <div className="border-b-2 border-b-gray-100 border-dashed py-2">
-                    <label className="font-semibold">Documento de Identidad</label>
-                    <div>{datosPersonales[0].DNI}</div>
+                  <label className="font-semibold">
+                    Documento de Identidad
+                  </label>
+                  <div>{datosPersonales[0].DNI}</div>
                 </div>
                 <div className="border-b-2 border-b-gray-100 border-dashed py-2">
-                    <label className="font-semibold">Teléfono</label>
-                    <div>{datosPersonales[0].telefono}</div>
+                  <label className="font-semibold">Teléfono</label>
+                  <div>{datosPersonales[0].telefono}</div>
                 </div>
               </Card>
             </div>
           </TabPane>
-          <TabPane tab="Direcciones" key="2">
-            Direcci
+          <TabPane
+            tab={
+              <span>
+                <i class="bi bi-geo-alt"></i>&nbsp; Direcciones
+              </span>
+            }
+            key="2"
+          >
+            <Typography.Title level={2}>Direcciones</Typography.Title>
+            <Divider />
+            <Card style={{
+              width: "350px"
+            }}>
+              <Typography.Title level={4}>
+                {datosPersonales[0].direccion}
+              </Typography.Title>
+              <Typography.Title level={5}>
+                {datosPersonales[0].ciudad}
+              </Typography.Title>
+              <Typography.Text>
+                {datosPersonales[0].distrito}, {datosPersonales[0].provincia}, {datosPersonales[0].departamento}
+              </Typography.Text>
+            </Card>
           </TabPane>
-          <TabPane tab="Tarjetas de crédito" key="3">
-            Content of Tab 3
+          <TabPane tab={
+              <span>
+                <i class="bi bi-credit-card"></i>&nbsp; Tarjeta de Crédito
+              </span>
+            } key="3">
+              <Typography.Title level={2}>Tarjetas de Crédito</Typography.Title>
+              <Divider />
+            <Card style={{
+              width: "350px"
+            }}>
+              <Typography.Title level={5}>
+                Número de tarjeta
+              </Typography.Title>
+              <div className="flex justify-start items-center gap-2">
+                <img src={datosPersonales[0].urlTarjeta} className="w-32"/>
+                <Typography.Text>
+                  **** **** **** {tarjeta.slice(-4)}
+                </Typography.Text>
+              </div>
+            </Card>
           </TabPane>
         </Tabs>
 

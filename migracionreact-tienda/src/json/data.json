@@ -7,11 +7,14 @@
         "apellidos": "Arriola Perez",
         "DNI": "48596126",
         "telefono": "999444123",
+        "ciudad": "Chiclayo",
         "distrito": "Chiclayo",
         "provincia": "Chiclayo",
         "departamento": "Lambayeque",
         "pais": "Peru",
-        "dirección": "Av. Las Flores 123, Urb Remigio Silva"
+        "direccion": "Av. Las Flores 123, Urb Remigio Silva",
+        "tarjeta": "1234 5678 1111 4588",
+        "urlTarjeta": "https://i.postimg.cc/MHXXp6f7/visa.jpg"
     },
     {
         "email": "brunodiaz@gmail.com",
@@ -21,11 +24,14 @@
         "apellidos": "Diaz",
         "DNI": "44667832",
         "telefono": "982444123",
+        "ciudad": "Lima",
         "distrito": "Miraflores",
         "provincia": "Lima",
         "departamento": "Lima",
         "pais": "Peru",
-        "dirección": "Av. Arequipa 145 Miraflores"
+        "direccion": "Av. Arequipa 145 Miraflores",
+        "tarjeta": "1234 5678 1111 2391",
+        "urlTarjeta": "https://i.postimg.cc/MHXXp6f7/visa.jpg"
     }
   ]
 }
